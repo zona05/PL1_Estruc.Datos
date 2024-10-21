@@ -7,4 +7,8 @@ add_executable(untitled main.cpp
         NodoPila.cpp
         NodoPila.h
         Pila.cpp
-        Pila.h)
+        Pila.h
+        Cola.cpp
+        Cola.h
+        NodoCola.cpp
+        NodoCola.h)

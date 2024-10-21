@@ -4,18 +4,20 @@
 
 #ifndef NODOPILA_H
 #define NODOPILA_H
-
+#include <iostream>
 
 
 class NodoPila {
-public:
+
+
+    private:
     int valor;
     NodoPila* siguiente;
-
-    NodoPila(int v, NodoPila* sig = nullptr) {
-        valor = v;
-        siguiente = sig;
-    }
+    friend class Pila;
+    public:
+    NodoPila();
+    NodoPila(int v, NodoPila* sig = nullptr);
+    ~NodoPila();
 };
 
 

@@ -1,3 +1,16 @@
-//
-// Created by javie on 18/10/2024.
-//
+
+#include "NodoPila.h"
+
+NodoPila::NodoPila(){
+    valor=valor();
+    siguiente=nullptr;
+}
+
+NodoPila::NodoPila(int v, NodoPila *sig){
+    valor = v;
+    siguiente = sig;
+}
+
+
+NodoPila::~NodoPila(){
+}
