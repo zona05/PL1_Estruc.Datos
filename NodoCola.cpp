@@ -1,15 +1,15 @@
 #include "NodoCola.h"
+NodoCola::NodoCola(){
+    siguiente=nullptr;
+    persona = Persona();
 
-NodoCola::NodoCola() {
-    siguiente = nullptr;
-    valor = 0;  // Valor por defecto
 }
 
-NodoCola::NodoCola(int v, NodoCola* sig) {
-    valor = v;
+NodoCola::NodoCola(Persona p , NodoCola*sig ){
+    persona = p;
     siguiente = sig;
 }
 
 NodoCola::~NodoCola() {
-    // Destructor si es necesario
+
 }

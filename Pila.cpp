@@ -17,28 +17,24 @@ bool Pila::esVacia() {
     return cima == nullptr;
 }
 
-void Pila::añadir(const Persona persona) {
-    NodoPila* nuevo = new NodoPila(persona, cima); // Crear nuevo nodo con persona
-    cima = nuevo; // La cima ahora apunta al nuevo nodo
+void Pila::añadir(const Persona& persona) {
+    NodoPila* nuevo = new NodoPila(persona, cima);
+    cima = nuevo;
 }
 
-void Pila::apilar(const Persona persona) {
+void Pila::apilar(const Persona& persona) {
     if (esVacia() || persona.inicio <= cima->persona.inicio) {
-        // Insertar directamente en la cima si la pila está vacía o la persona tiene el tiempo menor
         añadir(persona);
     } else {
-        Pila aux; // Pila auxiliar para ordenar los elementos
+        Pila aux;
 
-        // Mover elementos a la pila auxiliar hasta encontrar la posición de inserción
         while (!esVacia() && persona.inicio > cima->persona.inicio) {
-            aux.añadir(cima->persona); // Mover el elemento actual a la auxiliar
-            desapilar();                // Remover el elemento actual de la pila original
+            aux.añadir(cima->persona);
+            desapilar();
         }
 
-        // Insertar la nueva persona en la posición correcta
         añadir(persona);
 
-        // Regresar todos los elementos de la auxiliar a la pila original
         while (!aux.esVacia()) {
             añadir(aux.cima->persona);
             aux.desapilar();
@@ -46,12 +42,15 @@ void Pila::apilar(const Persona persona) {
     }
 }
 
-void Pila::desapilar() {
-    if (cima) {
-        NodoPila* nodo = cima;
-        cima = nodo->siguiente;
-        delete nodo;
+Persona Pila::desapilar() {
+    if (esVacia()) {
+        throw runtime_error("La pila está vacía.");
     }
+    NodoPila* nodo = cima;
+    Persona persona = nodo->persona;
+    cima = nodo->siguiente;
+    delete nodo;
+    return persona;
 }
 
 int Pila::contar() {
@@ -72,6 +71,6 @@ void Pila::mostrar() {
              << ", Prioridad: " << actual->persona.prioridad
              << ", Inicio: " << actual->persona.inicio
              << ", Tiempo: " << actual->persona.tiempo << endl;
-        actual = actual->siguiente; 
+        actual = actual->siguiente;
     }
 }

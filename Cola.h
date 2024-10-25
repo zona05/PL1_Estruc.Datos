@@ -1,18 +1,25 @@
 #ifndef COLA_H
 #define COLA_H
 #include "NodoCola.h"
+#include "Persona.h"
+using namespace std;
 
 class Cola {
 private:
-    NodoCola* primero;
-    NodoCola* ultimo;
+    friend class Persona;
+    NodoCola *primero;
+    NodoCola *ultimo;
     int longitud;
+
 public:
     Cola();
     ~Cola();
     bool esVacia();
-    void encolar(int v);
-    void desencolar();  // Asegúrate de declarar esto
+    void encolar(const Persona& persona);
+    void encolarprioridad(const Persona& persona);
+    Persona desencolar();
+    Persona frente();
+    void mostrar(); // Agrega la declaración
 };
 
 #endif //COLA_H
