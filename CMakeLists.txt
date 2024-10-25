@@ -11,4 +11,8 @@ add_executable(untitled main.cpp
         Cola.cpp
         Cola.h
         NodoCola.cpp
-        NodoCola.h)
+        NodoCola.h
+        Box.cpp
+        Box.h
+        Persona.cpp
+        Persona.h)
