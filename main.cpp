@@ -64,7 +64,7 @@ int main() {
                 // Implementar lógica si es necesario
                 opcion = 9; // Volver al menú
                 break;
-            case 7: // Simular todo el funcionamiento
+            case 7: // Simular
                 cout << "7. Simular todo el funcionamiento" << endl;
                 // Implementar lógica si es necesario
                 opcion = 9; // Volver al menú
