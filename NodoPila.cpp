@@ -1,16 +1,9 @@
-
+// NodoPila.cpp
 #include "NodoPila.h"
 
-NodoPila::NodoPila(){
-    valor=valor();
-    siguiente=nullptr;
+
+NodoPila::NodoPila(const Persona& persona, NodoPila* sig)
+    : persona(persona), siguiente(sig) {
 }
 
-NodoPila::NodoPila(int v, NodoPila *sig){
-    valor = v;
-    siguiente = sig;
-}
-
-
-NodoPila::~NodoPila(){
-}
+NodoPila::~NodoPila() {}

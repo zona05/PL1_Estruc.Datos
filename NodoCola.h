@@ -1,7 +1,5 @@
-
 #ifndef NODOCOLA_H
 #define NODOCOLA_H
-
 
 class NodoCola {
     friend class Cola;
@@ -12,13 +10,6 @@ public:
     NodoCola();
     NodoCola(int v, NodoCola* sig = nullptr);
     ~NodoCola();
-
 };
-
-
-
-
-
-
 
 #endif //NODOCOLA_H

@@ -3,42 +3,36 @@
 #include <iostream>
 using namespace std;
 
-
 Cola::Cola() {
     primero = nullptr;
     ultimo = nullptr;
     longitud = 0;
 }
+
 Cola::~Cola() {
+    // Destructor si es necesario
 }
+
 bool Cola::esVacia() {
-    return primero ==nullptr ;
+    return primero == nullptr;
 }
+
 void Cola::encolar(int v) {
-    NodoCola* nuevoNodo = new NodoCola(v);  // Crear un nuevo nodo con el valor
+    NodoCola* nuevoNodo = new NodoCola(v);
     if (esVacia()) {
-        // Si la cola está vacía, el nuevo nodo es tanto el frente como el final
         primero = nuevoNodo;
         ultimo = nuevoNodo;
     } else {
-        // Si la cola no está vacía, añadir el nuevo nodo al final
-        ultimo ->siguiente = nuevoNodo;
+        ultimo->siguiente = nuevoNodo;
         ultimo = nuevoNodo;
     }
 }
-void Cola::desencolar(){
-    if(!esVacia()){
-        Proceso elemento = primero->proceso;
+
+void Cola::desencolar() {
+    if (!esVacia()) {
         NodoCola* aux = primero;
-        if((primero == ultimo) && (primero->siguiente == NULL )){
-            primero = NULL;
-            ultimo = NULL;
-            aux->siguiente = NULL;
-            delete(aux);}
-        else{
-            primero = primero->siguiente;
-            aux->siguiente = NULL;
-            delete(aux);}
+        primero = primero->siguiente;
+        delete aux;
         longitud--;
     }
 }

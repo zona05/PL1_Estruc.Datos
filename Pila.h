@@ -1,10 +1,8 @@
-//
-// Created by javie on 18/10/2024.
-//
-
 #ifndef PILA_H
 #define PILA_H
 #include "NodoPila.h"
+
+#include "persona.h"
 
 class Pila {
 private:
@@ -14,17 +12,11 @@ public:
     Pila();
     ~Pila();
     bool esVacia();
-    void apilar(int v);
+    void añadir(Persona persona);
+    void apilar(Persona persona);
     void desapilar();
-    int mostrar();
     int contar();
-    int fondo();
-    void montar(Pila a, Pila b);
-    void quitar(int c);
-    Pila invertir();
-    int mayor_pila();
+    void mostrar();
 };
 
-
-
-#endif //PILA_H
+#endif // PILA_H

@@ -1,7 +1,3 @@
-//
-// Created by javie on 18/10/2024.
-//
-
 #include "Pila.h"
 #include <iostream>
 
@@ -21,123 +17,61 @@ bool Pila::esVacia() {
     return cima == nullptr;
 }
 
-void Pila::apilar(int v) {
-    NodoPila* nuevo = new NodoPila(v, cima);
-    cima = nuevo;
+void Pila::añadir(const Persona persona) {
+    NodoPila* nuevo = new NodoPila(persona, cima); // Crear nuevo nodo con persona
+    cima = nuevo; // La cima ahora apunta al nuevo nodo
+}
+
+void Pila::apilar(const Persona persona) {
+    if (esVacia() || persona.inicio <= cima->persona.inicio) {
+        // Insertar directamente en la cima si la pila está vacía o la persona tiene el tiempo menor
+        añadir(persona);
+    } else {
+        Pila aux; // Pila auxiliar para ordenar los elementos
+
+        // Mover elementos a la pila auxiliar hasta encontrar la posición de inserción
+        while (!esVacia() && persona.inicio > cima->persona.inicio) {
+            aux.añadir(cima->persona); // Mover el elemento actual a la auxiliar
+            desapilar();                // Remover el elemento actual de la pila original
+        }
+
+        // Insertar la nueva persona en la posición correcta
+        añadir(persona);
+
+        // Regresar todos los elementos de la auxiliar a la pila original
+        while (!aux.esVacia()) {
+            añadir(aux.cima->persona);
+            aux.desapilar();
+        }
+    }
 }
 
 void Pila::desapilar() {
-    if(cima) {
+    if (cima) {
         NodoPila* nodo = cima;
         cima = nodo->siguiente;
         delete nodo;
     }
 }
 
-int Pila::mostrar() {
-    if(esVacia()) {
-        cout << "La Pila esta vacia." << endl;
-        return -1;
-    }
-    else {
-        cout << "La cima de la pila es: " << cima->valor << endl;
-    }
-    return 0;
-}
-
 int Pila::contar() {
     int contador = 0;
     NodoPila* actual = cima;
-
-    while(actual != nullptr) {
-        contador ++;
+    while (actual != nullptr) {
+        contador++;
         actual = actual->siguiente;
     }
     return contador;
 }
 
-int Pila::fondo() {
+void Pila::mostrar() {
     NodoPila* actual = cima;
-    while(actual->siguiente != nullptr) {
-        actual = actual->siguiente;
+    while (actual != nullptr) {
+        cout << "ID: " << actual->persona.id
+             << ", País: " << actual->persona.pais
+             << ", Prioridad: " << actual->persona.prioridad
+             << ", Inicio: " << actual->persona.inicio
+             << ", Tiempo: " << actual->persona.tiempo << endl;
+        actual = actual->siguiente; 
     }
-    return actual->valor;
-}
-
-void Pila::montar(Pila a, Pila b) {
-
-    while (!esVacia()) {
-        desapilar();
-    }
-
-
-    Pila aux;
-
-
-    while (!a.esVacia()) {
-        aux.apilar(a.cima->valor);
-        a.desapilar();
-    }
-
-
-    while (!aux.esVacia()) {
-        apilar(aux.cima->valor);
-        aux.desapilar();
-    }
-
-    while (!b.esVacia()) {
-        aux.apilar(b.cima->valor);
-        b.desapilar();
-    }
-
-
-    while (!aux.esVacia()) {
-        apilar(aux.cima->valor);
-        aux.desapilar();
-    }
-}
-
-void Pila::quitar(int c) {
-    while(c!=0) {
-        desapilar();
-        c--;
-    }
-}
-
-Pila Pila::invertir() {
-    Pila aux;
-
-    while(!esVacia()) {
-        int valor = cima->valor;
-        desapilar();
-        aux.apilar(valor);
-    }
-    return aux;
-}
-
-int Pila::mayor_pila() {
-    Pila aux;
-    int maximo= cima->valor;
-    aux.apilar(maximo);
-    desapilar();
-
-    while(!esVacia()) {
-        int arriba = cima->valor;
-
-        if(arriba > maximo) {
-            maximo = arriba;
-        }
-        aux.apilar(arriba);
-        desapilar();
-    }
-
-    while(!aux.esVacia()) {
-        int arriba_aux = aux.cima->valor;
-        aux.desapilar();
-
-        if (arriba_aux != maximo) {
-            apilar(arriba_aux);
-        }
-    }
-    return maximo;
 }

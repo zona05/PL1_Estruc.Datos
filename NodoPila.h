@@ -1,25 +1,15 @@
-//
-// Created by javie on 18/10/2024.
-//
-
 #ifndef NODOPILA_H
 #define NODOPILA_H
-#include <iostream>
 
+#include "persona.h"
 
 class NodoPila {
-
-
-    private:
-    int valor;
+public:
+    Persona persona;
     NodoPila* siguiente;
-    friend class Pila;
-    public:
-    NodoPila();
-    NodoPila(int v, NodoPila* sig = nullptr);
+
+    NodoPila(const Persona& persona, NodoPila* siguiente = nullptr);
     ~NodoPila();
 };
 
-
-
-#endif //NODOPILA_H
+#endif // NODOPILA_H
