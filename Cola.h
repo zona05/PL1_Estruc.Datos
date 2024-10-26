@@ -5,13 +5,12 @@
 using namespace std;
 
 class Cola {
-private:
+public:
     friend class Persona;
     NodoCola *primero;
     NodoCola *ultimo;
     int longitud;
 
-public:
     Cola();
     ~Cola();
     bool esVacia();

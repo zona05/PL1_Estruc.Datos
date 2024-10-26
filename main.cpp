@@ -31,7 +31,7 @@ int main() {
                 cout << "Introduce el tiempo del pasajero: ";
                 cin >> tiempo;
 
-                pila.apilar(Persona(id, pais, prioridad, inicio, tiempo));
+                pila.apilar(Persona(id, pais, prioridad, inicio, tiempo,horario));
                 cout << "Pasajero añadido a la pila." << endl;
 
                 if (pila.contar() >= MAX_PASAJEROS) {

@@ -4,17 +4,22 @@
 #include "Pila.h"
 #include "Cola.h"
 #include "Persona.h"
-#include <vector>
+#include <array>
 
 class Simulacion {
 private:
-    Pila& pilaPasajeros;
-    Cola& colaEspera;
-    int tiempoActual;
-    std::vector<Persona> boxes;
+    Pila pilaPasajeros;
+    Cola colaEspera;
+    Cola box[3];
+    Pila auxPila;
+    int minutos;
+    int acciones = 0;
+    double media = 0.0;
 
 public:
-    Simulacion(Pila& pila, Cola& cola) : pilaPasajeros(pila), colaEspera(cola), tiempoActual(0), boxes(3) {}
+    Simulacion();
+    ~Simulacion();
+
 
     void procesarLlegadaPasajeros();
     void iniciarSimulacion();
