@@ -2,7 +2,7 @@
 #define PILA_H
 
 #include "NodoPila.h"
-#include "persona.h"
+#include "Persona.h"
 
 class Pila {
 private:
@@ -14,9 +14,11 @@ public:
     bool esVacia();
     void añadir(const Persona& persona);
     void apilar(const Persona& persona);
-    Persona desapilar(); // Cambiado de void a Persona
+    Persona desapilar();
     int contar();
-    void mostrar(); // Declaración correcta
+    void mostrar();
+    Persona peek();
+
 };
 
 #endif // PILA_H

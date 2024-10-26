@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Pila.h"
 #include "Cola.h"
+#include "Simulacion.h"
 
 using namespace std;
 
@@ -8,12 +9,13 @@ int main() {
     bool start = false;
     Pila pila;
     Cola cola;
+    Simulacion simulacion(pila, cola);
     int opcion = 9;
-    const int MAX_PASAJEROS = 10; // Límite de pasajeros en la pila
+    const int MAX_PASAJEROS = 10;
 
     while (!start) {
         switch (opcion) {
-            case 1: { // Añadir un pasajero
+            case 1: {
                 int id, prioridad, inicio;
                 double tiempo;
                 string pais;
@@ -29,65 +31,68 @@ int main() {
                 cout << "Introduce el tiempo del pasajero: ";
                 cin >> tiempo;
 
-                // Crear un objeto Persona y añadirlo a la pila
                 pila.apilar(Persona(id, pais, prioridad, inicio, tiempo));
                 cout << "Pasajero añadido a la pila." << endl;
 
-                // Si la pila alcanza el máximo, mover pasajeros a la cola
                 if (pila.contar() >= MAX_PASAJEROS) {
                     cout << "La pila está llena, comenzando a encolar pasajeros." << endl;
                     while (!pila.esVacia()) {
-                        cola.encolar(pila.desapilar()); // Encolar pasajeros desde la pila
+                        cola.encolar(pila.desapilar());
                     }
                 }
-                opcion = 9; // Reiniciar a la opción de menú
+                opcion = 9;
                 break;
             }
-            case 2: // Mostrar la pila de pasajeros
+            case 2:
                 cout << "Pila de pasajeros:" << endl;
                 if (!pila.esVacia()) {
                     pila.mostrar();
                 } else {
                     cout << "La pila está vacía." << endl;
                 }
-                opcion = 9; // Volver al menú
+                opcion = 9;
                 break;
-            case 3: // Borrar la pila de pasajeros
+            case 3:
                 cout << "Borrando la pila de pasajeros." << endl;
                 while (!pila.esVacia()) {
                     pila.desapilar();
                 }
                 cout << "La pila de pasajeros ha sido borrada." << endl;
-                opcion = 9; // Volver al menú
+                opcion = 9;
                 break;
-            case 4: // Mostrar la cola de espera de pasajeros
+            case 4:
                 cout << "Cola de espera de pasajeros:" << endl;
                 if (!cola.esVacia()) {
-                    cola.mostrar(); // Implementar mostrar en Cola.h
+                    cola.mostrar();
                 } else {
                     cout << "La cola está vacía." << endl;
                 }
-                opcion = 9; // Volver al menú
+                opcion = 9;
                 break;
-            case 5: // Mostrar los datos de los pasajeros en los boxes
-                // Implementar lógica si es necesario
-                opcion = 9; // Volver al menú
+            case 5:
+                cout << "Datos de los pasajeros en los boxes:" << endl;
+                simulacion.mostrarBoxes();
+                opcion = 9;
                 break;
-            case 6: // Simular N minutos
-                cout << "Simulando N minutos." << endl;
-                // Implementar lógica si es necesario
-                opcion = 9; // Volver al menú
+            case 6: {
+                int minutos;
+                cout << "Introduce el número de minutos a simular: ";
+                cin >> minutos;
+
+                simulacion.simularMinutos(minutos);
+                opcion = 9;
                 break;
-            case 7: // Simular
-                cout << "Simulando todo el funcionamiento." << endl;
-                // Implementar lógica si es necesario
-                opcion = 9; // Volver al menú
+            }
+            case 7:
+                cout << "Simulando todo el funcionamiento hasta que no haya pasajeros." << endl;
+                simulacion.simularCompleto();
+                opcion = 9;
                 break;
-            case 8: // No deseo realizar más acciones
+            case 8:
                 cout << "No deseo realizar más acciones." << endl;
                 start = true;
                 break;
-            case 9: // Mostrar opciones
+            case 9:
                 cout << "Introduce un número dependiendo de la acción que quieras realizar:" << endl;
                 cout << "1. Añadir un pasajero" << endl;
                 cout << "2. Mostrar la pila de pasajeros" << endl;
@@ -102,7 +107,7 @@ int main() {
                 break;
             default:
                 cout << "Opción no válida. Intente nuevamente." << endl;
-                opcion = 9; // Volver al menú en caso de opción no válida
+                opcion = 9;
                 break;
         }
     }

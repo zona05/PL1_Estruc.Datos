@@ -1,23 +1,20 @@
-/*
 #ifndef BOX_H
 #define BOX_H
 
-#include "Cola.h" // Incluye la cola que contiene las personas
-#include "persona.h" // Incluye la definición de Persona
+#include "Persona.h"
 
 class Box {
 private:
-    Persona personaActual; // Persona que está en el box
-    int tiempoAtencion; // Tiempo que necesita la persona en el box
-    int tiempoRestante; // Tiempo restante de atención
+    Persona personaActual;
+    int tiempoAtencion;
+    int tiempoRestante;
 
 public:
     Box();
-    void agregarPersona(const Persona& persona, int tiempo);
-    void procesarTiempo(); // Para simular el paso del tiempo
-    bool isLibre(); // Para verificar si el box está libre
-    void finalizarAtencion(Cola& colaPrioridad); // Para finalizar la atención y desencolar
+    bool isLibre() const;
+    void agregarPersona(const Persona& persona, int tiempoAtencion);
+    void finalizarAtencion();
+    void procesarTiempo();
 };
 
-#endif // BOX_H
-*/
+#endif

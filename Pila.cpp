@@ -74,3 +74,10 @@ void Pila::mostrar() {
         actual = actual->siguiente;
     }
 }
+
+Persona Pila::peek(){
+    if (esVacia()) {
+        throw runtime_error("La pila está vacía.");
+    }
+    return cima->persona;
+}

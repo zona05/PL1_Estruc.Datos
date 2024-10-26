@@ -15,4 +15,6 @@ add_executable(untitled main.cpp
         Box.cpp
         Box.h
         Persona.cpp
-        Persona.h)
+        Persona.h
+        Simulacion.cpp
+        Simulacion.h)
