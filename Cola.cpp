@@ -13,7 +13,7 @@ Cola::Cola() {
 
 Cola::~Cola() {
     while (!esVacia()) {
-        desencolar(); // Desencolar todos los elementos al destruir
+        desencolar();
     }
 }
 
@@ -22,21 +22,28 @@ bool Cola::esVacia() {
 }
 
 void Cola::encolar(Persona persona) {
-    NodoCola* nuevo_nodo = new NodoCola(persona); // Asegúrate de que este constructor esté disponible
+    NodoCola* nuevo_nodo = new NodoCola(persona);
     if (esVacia()) {
-        primero = nuevo_nodo; // Si la cola está vacía, primero y último apuntan al nuevo nodo
+        primero = nuevo_nodo;
         ultimo = nuevo_nodo;
     } else {
-        ultimo->siguiente = nuevo_nodo; // Enlaza el nuevo nodo al final de la cola
-        ultimo = nuevo_nodo; // Actualiza el puntero del último nodo
+        ultimo->siguiente = nuevo_nodo;
+        ultimo = nuevo_nodo;
     }
-    longitud++; // Incrementa la longitud de la cola
+    longitud++;
+    for (NodoCola* i = primero; i != nullptr; i = i->siguiente) {
+        for (NodoCola* j = primero; j->siguiente != nullptr; j = j->siguiente) {
+            if (j->persona.prioridad < j->siguiente->persona.prioridad) {
+                swap(j->persona, j->siguiente->persona);
+            }
+        }
+    }
 }
 
 Persona Cola::desencolar() {
     if (!esVacia()) {
         NodoCola* aux = primero;
-        Persona p = primero->persona; // Guardar la persona que se va a desencolar
+        Persona p = primero->persona;
 
         if ((primero == ultimo) && (primero->siguiente == nullptr)) {
             primero = nullptr;
@@ -46,22 +53,9 @@ Persona Cola::desencolar() {
         }
         delete aux;
         longitud--;
-        return p; // Retorna la persona desencolada
+        return p;
     }
-    throw runtime_error("La cola está vacía."); // Manejo de error
-}
-
-void Cola::encolarprioridad(Persona persona) {
-    // Aquí debes implementar el algoritmo para encolar según la prioridad
-    // Algoritmo de ordenamiento de burbuja
-    for (NodoCola* i = primero; i != nullptr; i = i->siguiente) {
-        for (NodoCola* j = primero; j->siguiente != nullptr; j = j->siguiente) {
-            // Intercambiar si la prioridad (número) de j es menor que la de j->siguiente
-            if (j->persona.prioridad < j->siguiente->persona.prioridad) {
-                swap(j->persona, j->siguiente->persona); // Intercambiar los objetos Persona
-            }
-        }
-    }
+    throw runtime_error("La cola está vacía.");
 }
 
 Persona Cola::frente() {
@@ -79,7 +73,7 @@ void Cola::mostrar() {
              << ", Prioridad: " << actual->persona.prioridad
              << ", Inicio: " << actual->persona.inicio
              << ", Tiempo: " << actual->persona.tiempo
-             << ", Horario: " << actual->persona.tiempo << endl;
+             << ", Horario: " << actual->persona.horario << endl;
         actual = actual->siguiente;
     }
 }

@@ -12,8 +12,6 @@ add_executable(untitled main.cpp
         Cola.h
         NodoCola.cpp
         NodoCola.h
-        Box.cpp
-        Box.h
         Persona.cpp
         Persona.h
         Simulacion.cpp

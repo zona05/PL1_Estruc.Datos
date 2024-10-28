@@ -6,7 +6,7 @@ using namespace std;
 Simulacion::Simulacion(Pila& pilaExterna, Cola& colaExterna) : pilaPasajeros(pilaExterna), colaEspera(colaExterna) {}
 
 Simulacion::~Simulacion() {
-    // Destructor si es necesario
+
 }
 
 void Simulacion::mostrarBoxes() {
@@ -21,7 +21,7 @@ void Simulacion::mostrarBoxes() {
 
 void Simulacion::simularMinutos(int minutos) {
     for (int i = 0; i < minutos; ++i) {
-        Pila aux;  // Pila auxiliar temporal
+        Pila aux;
         while (!pilaPasajeros.esVacia()) {
             if (pilaPasajeros.peek().inicio == i) {
                 colaEspera.encolar(pilaPasajeros.peek());
@@ -44,16 +44,21 @@ void Simulacion::simularMinutos(int minutos) {
             }
         }
         for (int k = 0; k < 3; ++k) {
-            if (box[k].longitud == 1) {
+            if (box[k].longitud != 0) {
                 Persona frentePersona = box[k].frente();
                 frentePersona.tiempo++;
                 frentePersona.horario--;
+
                 if (frentePersona.horario == 0) {
                     media += frentePersona.tiempo;
                     box[k].desencolar();
                     acciones++;
+                } else {
+                    box[k].desencolar();
+                    box[k].encolar(frentePersona);
                 }
             }
         }
+
     }
 }

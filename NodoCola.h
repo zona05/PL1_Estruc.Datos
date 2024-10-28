@@ -1,14 +1,13 @@
 #ifndef NODOCOLA_H
 #define NODOCOLA_H
 
-#include "Persona.h" // Asegúrate de incluir la cabecera de Persona
+#include "Persona.h"
 
 class NodoCola {
 public:
-    Persona persona;      // Objeto Persona en el nodo
-    NodoCola* siguiente;  // Puntero al siguiente nodo
+    Persona persona;
+    NodoCola* siguiente;
 
-    // Constructor para inicializar un NodoCola con una Persona
     NodoCola(Persona p , NodoCola*sig = nullptr );
     NodoCola();
     ~NodoCola();

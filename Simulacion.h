@@ -8,7 +8,7 @@
 
 class Simulacion {
 private:
-    Pila& pilaPasajeros;  // Referencia a la pila externa
+    Pila& pilaPasajeros;
     Cola& colaEspera;
     Cola box[3];
     int minutos;
@@ -16,7 +16,7 @@ private:
     double media = 0.0;
 
 public:
-    Simulacion(Pila& pilaExterna, Cola& colaExterna);  // Constructor con referencia a Pila
+    Simulacion(Pila& pilaExterna, Cola& colaExterna);
     ~Simulacion();
 
     void iniciarSimulacion();

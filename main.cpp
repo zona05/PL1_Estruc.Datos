@@ -11,7 +11,6 @@ int main() {
     Cola cola;
     Simulacion simulacion(pila, cola);
     int opcion = 9;
-    const int MAX_PASAJEROS = 10;
     int id, prioridad, inicio,horario;
     int tiempo = 0;
     while (!start) {
@@ -26,7 +25,7 @@ int main() {
                 cin >> pais;
                 cout << "Introduce la prioridad del pasajero: ";
                 cin >> prioridad;
-                cout << "Introduce el inicio del pasajero (1-10): ";
+                cout << "Introduce el minuto de llegada al aeropuerto: ";
                 cin >> inicio;
                 cout << "Introduce el tiempo de peaje del pasajero: ";
                 cin >> horario;
@@ -34,12 +33,6 @@ int main() {
                 pila.apilar(Persona(id, pais, prioridad, inicio,horario, tiempo));
                 cout << "Pasajero añadido a la pila." << endl;
 
-                if (pila.contar() >= MAX_PASAJEROS) {
-                    cout << "La pila está llena, comenzando a encolar pasajeros." << endl;
-                    while (!pila.esVacia()) {
-                        cola.encolar(pila.desapilar());
-                    }
-                }
                 opcion = 9;
                 break;
             }
