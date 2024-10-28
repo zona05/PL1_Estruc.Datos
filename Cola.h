@@ -15,8 +15,8 @@ public:
     Cola();
     ~Cola();
     bool esVacia();
-    void encolar(const Persona& persona);
-    void encolarprioridad(const Persona& persona);
+    void encolar(Persona persona);
+    void encolarprioridad(Persona persona);
     Persona desencolar();
     Persona frente();
     void mostrar(); // Agrega la declaración

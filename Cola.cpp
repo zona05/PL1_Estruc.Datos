@@ -21,7 +21,7 @@ bool Cola::esVacia() {
     return primero == nullptr;
 }
 
-void Cola::encolar(const Persona& persona) {
+void Cola::encolar(Persona persona) {
     NodoCola* nuevo_nodo = new NodoCola(persona); // Asegúrate de que este constructor esté disponible
     if (esVacia()) {
         primero = nuevo_nodo; // Si la cola está vacía, primero y último apuntan al nuevo nodo
@@ -51,7 +51,7 @@ Persona Cola::desencolar() {
     throw runtime_error("La cola está vacía."); // Manejo de error
 }
 
-void Cola::encolarprioridad(const Persona& persona) {
+void Cola::encolarprioridad(Persona persona) {
     // Aquí debes implementar el algoritmo para encolar según la prioridad
     // Algoritmo de ordenamiento de burbuja
     for (NodoCola* i = primero; i != nullptr; i = i->siguiente) {
@@ -78,7 +78,8 @@ void Cola::mostrar() {
              << ", País: " << actual->persona.pais
              << ", Prioridad: " << actual->persona.prioridad
              << ", Inicio: " << actual->persona.inicio
-             << ", Tiempo: " << actual->persona.tiempo << endl;
+             << ", Tiempo: " << actual->persona.tiempo
+             << ", Horario: " << actual->persona.tiempo << endl;
         actual = actual->siguiente;
     }
 }

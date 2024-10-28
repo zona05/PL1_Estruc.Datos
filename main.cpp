@@ -9,7 +9,7 @@ int main() {
     bool start = false;
     Pila pila;
     Cola cola;
-    Simulacion simulacion;
+    Simulacion simulacion(pila, cola);
     int opcion = 9;
     const int MAX_PASAJEROS = 10;
     int id, prioridad, inicio,horario;

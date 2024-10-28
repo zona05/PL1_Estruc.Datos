@@ -17,12 +17,12 @@ bool Pila::esVacia() {
     return cima == nullptr;
 }
 
-void Pila::añadir(const Persona& persona) {
+void Pila::añadir(Persona persona) {
     NodoPila* nuevo = new NodoPila(persona, cima);
     cima = nuevo;
 }
 
-void Pila::apilar(const Persona& persona) {
+void Pila::apilar(Persona persona) {
     if (esVacia() || persona.inicio <= cima->persona.inicio) {
         añadir(persona);
     } else {
@@ -70,7 +70,8 @@ void Pila::mostrar() {
              << ", País: " << actual->persona.pais
              << ", Prioridad: " << actual->persona.prioridad
              << ", Inicio: " << actual->persona.inicio
-             << ", Tiempo: " << actual->persona.tiempo << endl;
+             << ", Tiempo: " << actual->persona.tiempo
+             << ", Horario: " << actual->persona.horario << endl;
         actual = actual->siguiente;
     }
 }

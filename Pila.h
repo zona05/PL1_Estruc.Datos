@@ -12,8 +12,8 @@ public:
     Pila();
     ~Pila();
     bool esVacia();
-    void añadir(const Persona& persona);
-    void apilar(const Persona& persona);
+    void añadir(Persona persona);
+    void apilar(Persona persona);
     Persona desapilar();
     int contar();
     void mostrar();
