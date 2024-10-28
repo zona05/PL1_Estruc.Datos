@@ -20,6 +20,7 @@ public:
     Persona desencolar();
     Persona frente();
     void mostrar(); // Agrega la declaración
+    void incrementartiempo();
 
 };
 

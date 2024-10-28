@@ -77,3 +77,11 @@ void Cola::mostrar() {
         actual = actual->siguiente;
     }
 }
+void Cola:: incrementartiempo() {
+    NodoCola* actual = primero;
+    while (actual != nullptr) {
+        actual ->persona.tiempo +=1;
+        actual= actual -> siguiente;
+    }
+}
+

@@ -11,6 +11,7 @@ private:
     Pila& pilaPasajeros;
     Cola& colaEspera;
     Cola box[3];
+    Pila resfinal;
     int minutos;
     int acciones = 0;
     double media = 0.0;
@@ -22,6 +23,7 @@ public:
     void iniciarSimulacion();
     void simularMinutos(int minutos);
     void mostrarBoxes();
+    void simularEntero();
 };
 
 #endif // SIMULACION_H

@@ -78,6 +78,7 @@ int main() {
             }
             case 7:
                 cout << "Simulando todo el funcionamiento hasta que no haya pasajeros." << endl;
+                simulacion.simularEntero();
                 opcion = 9;
                 break;
             case 8:
