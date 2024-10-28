@@ -9,15 +9,15 @@ int main() {
     bool start = false;
     Pila pila;
     Cola cola;
-    Simulacion simulacion(pila, cola);
+    Simulacion simulacion;
     int opcion = 9;
     const int MAX_PASAJEROS = 10;
-
+    int id, prioridad, inicio,horario;
+    int tiempo = 0;
     while (!start) {
         switch (opcion) {
             case 1: {
-                int id, prioridad, inicio;
-                double tiempo;
+
                 string pais;
 
                 cout << "Introduce el ID del pasajero: ";
@@ -28,10 +28,10 @@ int main() {
                 cin >> prioridad;
                 cout << "Introduce el inicio del pasajero (1-10): ";
                 cin >> inicio;
-                cout << "Introduce el tiempo del pasajero: ";
-                cin >> tiempo;
+                cout << "Introduce el tiempo de peaje del pasajero: ";
+                cin >> horario;
 
-                pila.apilar(Persona(id, pais, prioridad, inicio, tiempo,horario));
+                pila.apilar(Persona(id, pais, prioridad, inicio,horario, tiempo));
                 cout << "Pasajero añadido a la pila." << endl;
 
                 if (pila.contar() >= MAX_PASAJEROS) {
@@ -85,7 +85,6 @@ int main() {
             }
             case 7:
                 cout << "Simulando todo el funcionamiento hasta que no haya pasajeros." << endl;
-                simulacion.simularCompleto();
                 opcion = 9;
                 break;
             case 8:

@@ -21,15 +21,10 @@ public:
     ~Simulacion();
 
 
-    void procesarLlegadaPasajeros();
     void iniciarSimulacion();
     void simularMinutos(int minutos);
-    void simularCompleto();
     void mostrarBoxes();
 
-private:
-    void moverAPasajeroDesdeCola();
-    void actualizarBoxes();
 };
 
 #endif // SIMULACION_H

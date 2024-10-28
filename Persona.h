@@ -13,10 +13,10 @@ struct Persona {
     int tiempo;
 
     // Constructor por defecto
-    Persona() : id(0), pais(""), prioridad(0), inicio(0), tiempo(0), horario (0) {}
+    Persona() : id(0), pais(""), prioridad(0), inicio(0),  horario (0),tiempo(0) {}
 
     // Declaración del constructor
-    Persona(int i, const std::string& p, int n, int k, int t,int h);
+    Persona(int i, const std::string& p, int n, int k, int h,int t);
     ~Persona();
 };
 

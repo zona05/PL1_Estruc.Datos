@@ -7,6 +7,7 @@ using namespace std;
 class Cola {
 public:
     friend class Persona;
+    friend class Simulacion;
     NodoCola *primero;
     NodoCola *ultimo;
     int longitud;
@@ -19,6 +20,7 @@ public:
     Persona desencolar();
     Persona frente();
     void mostrar(); // Agrega la declaración
+
 };
 
 #endif //COLA_H

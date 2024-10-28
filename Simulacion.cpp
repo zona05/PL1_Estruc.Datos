@@ -1,6 +1,8 @@
 #include "Simulacion.h"
 #include <iostream>
-#include <algorithm>
+
+
+using namespace std;
 Simulacion::Simulacion(){
     Pila pilaPasajeros;
     Cola colaEspera;
@@ -13,47 +15,17 @@ Simulacion::Simulacion(){
 Simulacion::~Simulacion(){
     //Destructor
 }
-void Simulacion::iniciarSimulacion() {
-    while (true) {
-        procesarLlegadaPasajeros();
-        moverAPasajeroDesdeCola();
-        actualizarBoxes();
-        mostrarBoxes();
 
-        if (std::none_of(boxes.begin(), boxes.end(), [](const Persona& p) { return p.tiempo > 0; })) {
-            break;
-        }
-    }
-}
 
-void Simulacion::procesarLlegadaPasajeros() {
-    while (!pilaPasajeros.esVacia() && pilaPasajeros.peek().inicio <= tiempoActual) {
-        Persona pasajero = pilaPasajeros.desapilar();
-        colaEspera.encolar(pasajero);
-    }
-}
 
-void Simulacion::moverAPasajeroDesdeCola() {
-    for (auto& box : boxes) {
-        if (box.tiempo == 0 && !colaEspera.esVacia()) {
-            box = colaEspera.desencolar();
-        }
-    }
-}
 
-void Simulacion::actualizarBoxes() {
-    for (auto& box : boxes) {
-        if (box.tiempo > 0) {
-            box.tiempo--;
-        }
-    }
-}
+
 
 void Simulacion::mostrarBoxes() {
-    for (const auto& box : boxes) {
-        if (box.tiempo > 0) {
-            std::cout << "Pasajero ID: " << box.id << ", País: " << box.pais
-                      << ", Tiempo restante: " << box.tiempo << " minutos" << std::endl;
+    for (int k = 0; k < 3; ++k) {
+        if (box[k].longitud != 0) {
+            cout << "Pasajero ID: " << box[k].frente().id << ", País: " << box[k].frente().pais
+                      << ", Tiempo restante: " << box[k].frente().tiempo << " minutos" << endl;
         }
     }
 }
@@ -63,7 +35,7 @@ void Simulacion::simularMinutos(int minutos) {
     for (int i = 0; i < minutos; ++i) {
         Pila aux;
         while (!pilaPasajeros.esVacia()) {
-            if(pilaPasajeros.peek().horario == i) {
+            if(pilaPasajeros.peek().inicio == i) {
                 colaEspera.encolar(pilaPasajeros.peek());
                 colaEspera.encolarprioridad(pilaPasajeros.peek());
                 aux.apilar(pilaPasajeros.peek());
@@ -81,8 +53,8 @@ void Simulacion::simularMinutos(int minutos) {
         }
         for (int l = 0; l < 3; ++l) {
             if (box[l].longitud == 0 && !colaEspera.esVacia()) {
-            box[l].encolar(colaEspera.frente());
-            colaEspera.desencolar();
+                box[l].encolar(colaEspera.frente());
+                colaEspera.desencolar();
             }
         }
         for (int k = 0; k < 3; ++k) {
@@ -100,9 +72,7 @@ void Simulacion::simularMinutos(int minutos) {
 
 
 
+        }
     }
 }
 
-void Simulacion::simularCompleto() {
-    iniciarSimulacion();
-}

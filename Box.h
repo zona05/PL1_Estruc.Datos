@@ -1,4 +1,4 @@
-#ifndef BOX_H
+/*#ifndef BOX_H
 #define BOX_H
 
 #include "Persona.h"
@@ -18,3 +18,4 @@ public:
 };
 
 #endif
+*/
