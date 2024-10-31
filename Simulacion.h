@@ -12,6 +12,7 @@ private:
     Cola& colaEspera;
     Cola box[3];
     Pila resfinal;
+    int tiemposim;
     int minutos;
     int acciones = 0;
     double media = 0.0;
@@ -20,10 +21,16 @@ public:
     Simulacion(Pila& pilaExterna, Cola& colaExterna);
     ~Simulacion();
 
-    void iniciarSimulacion();
     void simularMinutos(int minutos);
     void mostrarBoxes();
     void simularEntero();
+    void Simular();
+    void Boxear();
+    void Boxeamiento();
+    void Finalizar();
+    void Traspaso();
+
+
 };
 
 #endif // SIMULACION_H
