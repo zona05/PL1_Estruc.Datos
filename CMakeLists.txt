@@ -15,4 +15,8 @@ add_executable(untitled main.cpp
         Persona.cpp
         Persona.h
         Simulacion.cpp
-        Simulacion.h)
+        Simulacion.h
+        Lista.cpp
+        Lista.h
+        NodoLista.cpp
+        NodoLista.h)

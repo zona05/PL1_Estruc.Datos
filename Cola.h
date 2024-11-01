@@ -8,6 +8,7 @@ class Cola {
 public:
     friend class Persona;
     friend class Simulacion;
+    friend class Lista;
     NodoCola *primero;
     NodoCola *ultimo;
     int longitud;
