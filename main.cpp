@@ -8,8 +8,8 @@ using namespace std;
 int main() {
     bool start = false;
     Pila pila;
-    Cola cola;
-    Simulacion simulacion(pila, cola);
+    Lista lista;
+    Simulacion simulacion(pila, lista);
     int opcion = 9;
     int id, prioridad, inicio,horario;
     int tiempo = 0;
@@ -55,16 +55,12 @@ int main() {
                 break;
             case 4:
                 cout << "Cola de espera de pasajeros:" << endl;
-                if (!cola.esVacia()) {
-                    cola.mostrar();
-                } else {
-                    cout << "La cola está vacía." << endl;
-                }
+
                 opcion = 9;
                 break;
             case 5:
                 cout << "Datos de los pasajeros en los boxes:" << endl;
-                simulacion.mostrarBoxes();
+
                 opcion = 9;
                 break;
             case 6: {
@@ -104,5 +100,5 @@ int main() {
                 break;
         }
     }
-    return 0;
+
 }

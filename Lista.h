@@ -1,10 +1,12 @@
 
 #ifndef LISTA_H
 #define LISTA_H
-
-
+#include "Cola.h"
+#include "NodoLista.h"
 
 class Lista {
+    friend class Cola;
+
 private:
     NodoLista* primero;
     NodoLista* ultimo;
@@ -12,16 +14,19 @@ private:
 
 public:
     Lista();
+    Lista(Cola c);
     ~Lista();
-    Cola Peak();
-    Cola Final();
-    int Longitud();
+    Cola peak();
+    Cola final();
+    Cola obtener(int n);
+    int longitud();
     bool EsVacia();
     void AgregarOrdena(Cola cola);
-    void Quitarultimo(Cola cola);
+    void Quitarultimo();
     void mostrarLista();
-    void vacios();
-    void todolleno();
+    int vacios();
+    bool todolleno();
+    void OrdenaLista();
 
 
 };

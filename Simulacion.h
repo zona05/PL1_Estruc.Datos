@@ -3,22 +3,23 @@
 
 #include "Pila.h"
 #include "Cola.h"
+#include "Lista.h"
 #include "Persona.h"
 #include <array>
 
 class Simulacion {
 private:
     Pila& pilaPasajeros;
-    Cola& colaEspera;
-    Cola box[3];
+    Lista& listaBox;
     Pila resfinal;
     int tiemposim;
     int minutos;
     int acciones = 0;
     double media = 0.0;
+    Cola cola;
 
 public:
-    Simulacion(Pila& pilaExterna, Cola& colaExterna);
+    Simulacion(Pila& pilaExterna, Lista& listaExterna);
     ~Simulacion();
 
     void simularMinutos(int minutos);
@@ -29,7 +30,8 @@ public:
     void Boxeamiento();
     void Finalizar();
     void Traspaso();
-
+    void AgregarBoxes();
+    void QuitarBoxes();
 
 };
 

@@ -4,9 +4,8 @@
 #include <iostream>
 #include "Cola.h"
 
-class NodoLista
-{
-private:
+class NodoLista {
+public:
     NodoLista* siguiente;
     Cola cola;
 
@@ -15,7 +14,6 @@ private:
     friend class Cola;
     friend class NodoCola;
 
-public:
     NodoLista();
     NodoLista(Cola c, NodoLista*sig = nullptr);
     ~NodoLista();

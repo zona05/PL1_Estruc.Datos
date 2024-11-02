@@ -18,16 +18,16 @@ Lista::Lista(Cola c)
     ultimo = primero;
     cntbox = 1;
 }
-Cola Lista::Peak() {
+Cola Lista::peak() {
     return primero -> cola;
 }
-Cola Lista::Final() {
+Cola Lista::final() {
     return ultimo -> cola;
 }
 bool Lista::EsVacia() {
     return cntbox == 0;
 }
-int Lista::Longitud() {
+int Lista::longitud() {
     return cntbox;
 }
 void Lista::AgregarOrdena(Cola cola) {
@@ -44,8 +44,9 @@ void Lista::AgregarOrdena(Cola cola) {
         aux -> siguiente = primero;
         primero = aux;
     }
+
 }
-void Lista::Quitarultimo(Cola cola) {
+void Lista::Quitarultimo() {
     NodoLista* aux ;
     if(cntbox>=2) {
         aux = primero;
@@ -72,9 +73,10 @@ void Lista::mostrarLista() {
     }
 }
 int Lista::vacios() {
+    int boxesvacios = 0;
     if (!EsVacia()) {
         NodoLista* aux = primero;
-        int boxesvacios = 0;
+
         while(aux  !=nullptr) {
 
             if(aux -> cola.esVacia()) {
@@ -83,14 +85,15 @@ int Lista::vacios() {
             aux = aux -> siguiente;
 
         }
-        return boxesvacios;
-    }
 
+    }
+    return boxesvacios;
 }
 bool Lista::todolleno() {
+    int boxesllenos = 0;
     if (!EsVacia()) {
         NodoLista* aux = primero;
-        int boxesllenos = 0;
+
         while(aux  !=nullptr) {
 
             if(aux -> cola.longitud > 2) {
@@ -99,7 +102,47 @@ bool Lista::todolleno() {
             aux = aux -> siguiente;
 
         }
-        return boxesllenos == cntbox;
+
     }
 
+    return boxesllenos == cntbox;
+}
+
+void Lista::OrdenaLista() {
+    if (EsVacia() || primero->siguiente == nullptr) {
+
+        return;
+    }
+    NodoLista* aux = primero;
+    while (aux != nullptr) {
+        NodoLista* aux2 = primero;
+        while(aux2 -> siguiente != nullptr) {
+            if (aux2 ->cola.longitud < aux2->siguiente -> cola.longitud) {
+                Cola temporal = aux2 -> cola;
+                aux2->cola = aux2 ->siguiente -> cola;
+                aux2 -> siguiente -> cola = temporal;
+            }
+            aux2 = aux2 -> siguiente;
+        }
+        aux = aux -> siguiente;
+    }
+}
+Cola Lista::obtener(int n) {
+
+    NodoLista* actual = primero;
+    int indice = 0;
+
+    while (actual != nullptr && indice < n) {
+        actual = actual->siguiente;  // Suponiendo que tienes un puntero siguiente en NodoLista
+        indice++;
+    }
+
+    return actual->cola;  // Suponiendo que `dato` es el atributo que almacena la Cola en NodoLista
+}
+Lista::~Lista()
+{
+    while (!EsVacia())
+    {
+        Quitarultimo();
+    }
 }

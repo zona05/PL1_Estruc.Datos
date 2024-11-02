@@ -8,6 +8,7 @@ public:
     Persona persona;
     NodoCola* siguiente;
 
+
     NodoCola(Persona p , NodoCola*sig = nullptr );
     NodoCola();
     ~NodoCola();
