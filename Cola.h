@@ -19,10 +19,11 @@ public:
     void encolar(Persona persona);
     void encolarprioridad(Persona persona);
     Persona desencolar();
-    Persona frente();
+
+    Persona &frente();
     void mostrar(); // Agrega la declaración
     void incrementartiempo();
-
+    Persona& obtenerPersona(int posicion);
 };
 
 #endif //COLA_H

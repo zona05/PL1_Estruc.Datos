@@ -31,13 +31,7 @@ void Cola::encolar(Persona persona) {
         ultimo = nuevo_nodo;
     }
     longitud++;
-    for (NodoCola* i = primero; i != nullptr; i = i->siguiente) {
-        for (NodoCola* j = primero; j->siguiente != nullptr; j = j->siguiente) {
-            if (j->persona.prioridad < j->siguiente->persona.prioridad) {
-                swap(j->persona, j->siguiente->persona);
-            }
-        }
-    }
+
 }
 
 Persona Cola::desencolar() {
@@ -58,7 +52,7 @@ Persona Cola::desencolar() {
     throw runtime_error("La cola está vacía.");
 }
 
-Persona Cola::frente() {
+Persona &Cola::frente() {
     if (esVacia()) {
         throw runtime_error("La cola está vacía.");
     }
@@ -69,7 +63,7 @@ void Cola::mostrar() {
     NodoCola* actual = primero;
     while (actual != nullptr) {
         cout << "ID: " << actual->persona.id
-             << ", País: " << actual->persona.pais
+             << ", Pais: " << actual->persona.pais
              << ", Prioridad: " << actual->persona.prioridad
              << ", Inicio: " << actual->persona.inicio
              << ", Tiempo: " << actual->persona.tiempo
@@ -85,5 +79,20 @@ void Cola:: incrementartiempo() {
     }
 }
 
+Persona& Cola::obtenerPersona(int posicion) {
+    if (esVacia()) {
+        throw std::out_of_range("No se puede obtener la persona, la cola está vacía.");
+    }
+    if (posicion < 0 || posicion >= longitud) {
+        throw std::out_of_range("Índice fuera de rango.");
+    }
+
+    NodoCola* actual = primero; // Comenzar desde el frente de la cola
+    for (int index = 0; index < posicion; ++index) {
+        actual = actual->siguiente; // Avanzar al siguiente nodo
+    }
+
+    return actual->persona; // Retornar la referencia a la Persona en la posición 'posicion'
+}
 
 

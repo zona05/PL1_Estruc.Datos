@@ -16,9 +16,9 @@ public:
     Lista();
     Lista(Cola c);
     ~Lista();
-    Cola peak();
-    Cola final();
-    Cola obtener(int n);
+    Cola& peak();
+    Cola& final();
+    Cola& obtener(int n);
     int longitud();
     bool EsVacia();
     void AgregarOrdena(Cola cola);

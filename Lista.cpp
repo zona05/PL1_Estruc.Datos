@@ -18,11 +18,20 @@ Lista::Lista(Cola c)
     ultimo = primero;
     cntbox = 1;
 }
-Cola Lista::peak() {
-    return primero -> cola;
+Cola& Lista::peak() {
+    if (primero == nullptr) {
+        cout << "Error: Intento de acceso a cola en lista vacía (peak)." << endl;
+        throw std::runtime_error("Acceso a cola en lista vacía.");
+    }
+    return primero->cola; // Retorna la referencia a `cola` de `primero`
 }
-Cola Lista::final() {
-    return ultimo -> cola;
+
+Cola& Lista::final() {
+    if (ultimo == nullptr) {
+        cout << "Error: Intento de acceso a cola en lista vacía (final)." << endl;
+        throw std::runtime_error("Acceso a cola en lista vacía.");
+    }
+    return ultimo->cola; // Retorna la referencia a `cola` de `ultimo`
 }
 bool Lista::EsVacia() {
     return cntbox == 0;
@@ -32,7 +41,7 @@ int Lista::longitud() {
 }
 void Lista::AgregarOrdena(Cola cola) {
 
-    cntbox++;
+
     NodoLista* aux = new NodoLista(cola);
     if (EsVacia()) {
 
@@ -44,7 +53,7 @@ void Lista::AgregarOrdena(Cola cola) {
         aux -> siguiente = primero;
         primero = aux;
     }
-
+    cntbox++;
 }
 void Lista::Quitarultimo() {
     NodoLista* aux ;
@@ -61,13 +70,13 @@ void Lista::Quitarultimo() {
 void Lista::mostrarLista() {
     if (!EsVacia()) {
         NodoLista* aux = primero;
-        int numerobox = cntbox;
+        int numerobox = 1;
         while(aux  !=nullptr) {
             cout << "--- Box ---" << endl;
-            cout << "Box: "<< numerobox <<": "  << endl;
+            cout << "Box: "<< numerobox  << endl;
             aux -> cola.mostrar();
             aux = aux -> siguiente;
-            numerobox--;
+            numerobox++;
         }
 
     }
@@ -127,17 +136,18 @@ void Lista::OrdenaLista() {
         aux = aux -> siguiente;
     }
 }
-Cola Lista::obtener(int n) {
-
+Cola& Lista::obtener(int n) {
     NodoLista* actual = primero;
-    int indice = 0;
+    int indice = 1; // Cambiar a 1 para que coincida con tu índice basado en 1
 
     while (actual != nullptr && indice < n) {
-        actual = actual->siguiente;  // Suponiendo que tienes un puntero siguiente en NodoLista
+        actual = actual->siguiente; // Suponiendo que tienes un puntero siguiente en NodoLista
         indice++;
     }
 
-    return actual->cola;  // Suponiendo que `dato` es el atributo que almacena la Cola en NodoLista
+    if (actual != nullptr) {
+        return actual->cola; // Devolver la cola correspondiente
+    }
 }
 Lista::~Lista()
 {
