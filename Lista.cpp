@@ -1,9 +1,9 @@
-
 #include "NodoLista.h"
 #include "Lista.h"
 #include "Cola.h"
 #include "NodoCola.h"
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 Lista::Lista() {
@@ -127,9 +127,7 @@ void Lista::OrdenaLista() {
         NodoLista* aux2 = primero;
         while(aux2 -> siguiente != nullptr) {
             if (aux2 ->cola.longitud < aux2->siguiente -> cola.longitud) {
-                Cola temporal = aux2 -> cola;
-                aux2->cola = aux2 ->siguiente -> cola;
-                aux2 -> siguiente -> cola = temporal;
+                std::swap(aux2 ->cola, aux2 ->siguiente -> cola);
             }
             aux2 = aux2 -> siguiente;
         }

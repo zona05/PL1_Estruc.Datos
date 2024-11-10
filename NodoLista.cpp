@@ -13,4 +13,3 @@ NodoLista::NodoLista(Cola c,NodoLista*sig) {
 NodoLista::~NodoLista() {
 
 }
-
