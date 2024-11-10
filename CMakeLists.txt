@@ -19,4 +19,5 @@ add_executable(untitled main.cpp
         Lista.cpp
         Lista.h
         NodoLista.cpp
-        NodoLista.h)
+        NodoLista.h
+        SimulacionLista.cpp)
