@@ -27,6 +27,8 @@ public:
     bool todolleno();
     void OrdenaLista();
     int encontrarMenor(Lista *lista);
+    int encontrarMayor(Lista* lista);
+    void eliminarPos(int n);
 
 };
 

@@ -10,21 +10,20 @@ SimulacionLista::~SimulacionLista() {
 
 }
 void SimulacionLista::TraspasoLista() {
-    Pila aux;
+
 
     while (!pilaPasajeros.esVacia()) { //pila a cola
         if (pilaPasajeros.peek().inicio == tiemposim) {
             int destinacion;
             destinacion = lista.encontrarMenor(&lista);
-            Cola& colabox = lista.obtener(destinacion);
+            Cola& colabox = lista.obtener(destinacion + 1);
             colabox.encolar(pilaPasajeros.peek());
             cout << "Pasajero " << pilaPasajeros.peek().id << " llega al aeropuerto en el minuto: " << tiemposim << endl;
-            aux.apilar(pilaPasajeros.peek());
-            pilaPasajeros.desapilar();
         } else {
             aux.apilar(pilaPasajeros.peek());
-            pilaPasajeros.desapilar();
+
         }
+        pilaPasajeros.desapilar();
     }
     while (!aux.esVacia()) {
         pilaPasajeros.apilar(aux.peek());
@@ -32,16 +31,18 @@ void SimulacionLista::TraspasoLista() {
     }
 }
 void SimulacionLista::BoxeamientoLista() {
-    for (int k = 0; k < lista.longitud() +1; ++k) {  // Asumiendo que los índices comienzan en 1
+    for (int k = 1; k < lista.longitud() +1 ; ++k) {  // Asumiendo que los índices comienzan en 1
         Cola& colabox = lista.obtener(k);  // Obtener la cola actual
 
         // Aumentar el tiempo para todas las personas en la cola.
         int totalPersonas = colabox.longitud;  // Obtener el número de personas en la cola
 
         // Aumentar el tiempo de todas las personas en la cola
-        for (int i = 0; i < totalPersonas +1; ++i) {
-            Persona& persona = colabox.obtenerPersona(i);  // Obtener persona por índice
-            persona.tiempo++;  // Aumenta el tiempo de cada persona
+        if (!colabox.esVacia()) {
+            for (int i = 0; i < totalPersonas ; ++i) {
+                Persona& persona = colabox.obtenerPersona(i);  // Obtener persona por índice
+                persona.tiempo++;  // Aumenta el tiempo de cada persona
+            }
         }
 
         // Disminuir el horario solo para la persona al frente (primer elemento)
@@ -69,29 +70,54 @@ void SimulacionLista::FinalizarLista() {
         cout << "Pasajero " << resfinal.peek().id << ", tiempo ocupado en el aeropuerto: " << resfinal.peek().tiempo << endl;
         resfinal.desapilar();
     }
-    for (int m = 0; m < lista.longitud() +1 ; ++m) {
+    for (int m = 1; m < lista.longitud() +1 ; ++m) {
         if (lista.obtener(m).longitud != 0) {
             cout << "El box " << m << " está ocupado por el pasajero: " << lista.obtener(m).frente().id << endl;
         }
     }
 }
-void SimulacionLista::simularMinutosLista(int minutos) {
-    Pila resfinal;
-
-    for (int i = 0; i < minutos; ++i) {
-        tiemposim = i;  // Actualiza el tiempo actual de la simulación
-
-        // Paso 1: Pasar los pasajeros de la pila a la cola de espera
-        TraspasoLista();
-
-        // Paso 2: Asignar pasajeros de la cola de espera a los boxes
-
-        // Paso 3: Atender a los pasajeros en los boxes
-        BoxeamientoLista();
-
-
+void SimulacionLista::QuitarBoxes() {
+    if (lista.vacios() > 2) {
+        for (int k = 0; k < lista.vacios(); ++k) {
+            if (lista.longitud() > 1) {
+                int menor = lista.encontrarMayor(&lista);
+                lista.eliminarPos(menor);
+                 // Asegúrate de que Quitarultimo esté implementado
+            }
+        }
     }
-
-    // Paso 4: Mostrar resultados finales
+}
+void SimulacionLista::AgregarBoxes() {
+    if (lista.todolleno()) {
+        Cola colatest;
+        lista.AgregarOrdena(colatest);
+    }
+}
+void SimulacionLista::simularMinutosLista(int minutos) {
+    for (int i = 0; i < minutos; ++i) {
+        cout << "Simulando minuto: " << tiemposim << endl;
+        TraspasoLista();
+        BoxeamientoLista();
+        QuitarBoxes();
+        AgregarBoxes();
+        tiemposim++;
+    }
     FinalizarLista();
+}
+
+
+
+void SimulacionLista::simularEnteroLista() {
+    tiemposim = 0;
+    int a = pilaPasajeros.contar();
+    while (resfinal.contar() != a) {
+        TraspasoLista();
+        BoxeamientoLista();
+        QuitarBoxes();
+        AgregarBoxes();
+        tiemposim++;
+    }
+    FinalizarLista();
+
+    cout << "La simulación ha tardado este número de minutos: " << tiemposim << endl;
 }

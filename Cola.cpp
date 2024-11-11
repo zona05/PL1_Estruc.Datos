@@ -33,6 +33,24 @@ void Cola::encolar(Persona persona) {
     longitud++;
 
 }
+void Cola::encolar_ordenado(Persona persona) {
+    NodoCola* nuevo_nodo = new NodoCola(persona);
+    if (esVacia()) {
+        primero = nuevo_nodo;
+        ultimo = nuevo_nodo;
+    } else {
+        ultimo->siguiente = nuevo_nodo;
+        ultimo = nuevo_nodo;
+    }
+    longitud++;
+    for (NodoCola* i = primero; i != nullptr; i = i->siguiente) {
+        for (NodoCola* j = primero; j->siguiente != nullptr; j = j->siguiente) {
+            if (j->persona.prioridad < j->siguiente->persona.prioridad) {
+                swap(j->persona, j->siguiente->persona);
+            }
+        }
+    }
+}
 
 Persona Cola::desencolar() {
     if (!esVacia()) {

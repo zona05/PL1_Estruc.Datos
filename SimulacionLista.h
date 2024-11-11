@@ -14,7 +14,8 @@ private:
     Pila& pilaPasajeros;
     Lista& lista;
     Pila resfinal;
-    int tiemposim;
+    Pila aux;
+    int tiemposim = 0;
     int minutos;
     int acciones = 0;
     double media = 0.0;
@@ -27,12 +28,13 @@ public:
 
     void simularMinutosLista(int minutos);
     void mostrarBoxes();
-    void simularEntero();
+    void simularEnteroLista();
     void Simular();
     void BoxeamientoLista();
     void FinalizarLista();
     void TraspasoLista();
-
+    void QuitarBoxes();
+    void AgregarBoxes();
 
 };
 

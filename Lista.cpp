@@ -139,6 +139,28 @@ int Lista::encontrarMenor(Lista* lista) {
 
     return posicion_menor;
 }
+int Lista::encontrarMayor(Lista* lista) {
+    if (lista->EsVacia()) {
+        return -1; // Retorna -1 si la lista está vacía
+    }
+
+    int posicion_mayor = 0; // Empezamos en la posición 1 (primer nodo)
+    int posicion_actual = 0; // Para llevar la cuenta de la posición actual
+    int longitud_mayor = lista->primero->cola.longitud; // Longitud inicial de la primera cola
+
+    NodoLista* actual = lista->primero; // Comenzamos desde el primer nodo
+
+    while (actual != nullptr) {
+        if (actual->cola.longitud > longitud_mayor) {
+            longitud_mayor = actual->cola.longitud;
+            posicion_mayor = posicion_actual; // Actualizamos la posición del menor
+        }
+        actual = actual->siguiente; // Avanzamos al siguiente nodo
+        posicion_actual++; // Aumentamos la posición
+    }
+
+    return posicion_mayor;
+}
 
 void Lista::OrdenaLista() {
     if (EsVacia() || primero->siguiente == nullptr) {
@@ -169,6 +191,38 @@ Cola& Lista::obtener(int n) {
     if (actual != nullptr) {
         return actual->cola; // Devolver la cola correspondiente
     }
+}
+void Lista::eliminarPos(int n) {
+    if (n < 0 || n >= cntbox) { // cntbox es la longitud de la lista
+        cout << "Posición inválida." << std::endl;
+        return;
+    }
+
+    NodoLista* temp = primero;
+
+
+    if (n == 0) {
+        primero = primero->siguiente; // Mover el puntero al siguiente nodo
+        delete temp;                   // Liberar el nodo antiguo
+    } else {
+
+        for (int i = 0; i < n - 1; i++) {
+            temp = temp->siguiente;
+        }
+
+
+        NodoLista* nodoAEliminar = temp->siguiente; // El nodo que queremos eliminar
+        temp->siguiente = nodoAEliminar->siguiente;  // Saltar el nodo a eliminar
+
+        // Si estamos eliminando el último nodo, actualizar `ultimo`
+        if (nodoAEliminar == ultimo) {
+            ultimo = temp;
+        }
+
+        delete nodoAEliminar; // Liberar el nodo de la memoria
+    }
+
+    cntbox--; // Reducir el contador de elementos en la lista
 }
 Lista::~Lista()
 {

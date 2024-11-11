@@ -24,6 +24,7 @@ public:
     void mostrar(); // Agrega la declaración
     void incrementartiempo();
     Persona& obtenerPersona(int posicion);
+    void encolar_ordenado(Persona persona);
 };
 
 #endif //COLA_H

@@ -2,6 +2,7 @@
 #include "Pila.h"
 #include "Cola.h"
 #include "Simulacion.h"
+#include "SimulacionLista.h"
 #include "Lista.h"
 
 using namespace std;
@@ -25,8 +26,11 @@ int main() {
         pila.apilar(Persona(2, "Portugal", 1, 0, 15, 0));
         pila.apilar(Persona(3, "Australia", 7, 5, 39, 0));
         pila.apilar(Persona(4, "Sudafrica", 5, 7, 23, 0));
-        pila.apilar(Persona(5, "Indonesia", 6, 10, 16, 0));
+        pila.apilar(Persona(5, "Indonesia", 6, 9, 16, 0));
         pila.apilar(Persona(6, "Noruega", 4, 11, 23, 0));
+        pila.apilar(Persona(7, "Australia",7,14,31,0));
+        pila.apilar(Persona(8, "Italia",2,18,14,0));
+        pila.apilar(Persona(9, "Alemania",3,21,20,0));
         int opcion = 9;
         int id, prioridad, inicio, horario;
         int tiempo = 0;
@@ -126,17 +130,19 @@ int main() {
         Pila pila;
         Lista lista;
         Cola colainicio;
-        Cola boxocupado;
-        Cola boxmenosoc;
         lista.AgregarOrdena(colainicio);
         lista.AgregarOrdena(colainicio);
-        Simulacion simulacion(pila, colainicio);
+        lista.AgregarOrdena(colainicio);
+        SimulacionLista simulacionlista(pila, lista);
         pila.apilar(Persona(1, "Indonesia", 6, 0, 20, 0));
         pila.apilar(Persona(2, "Portugal", 1, 0, 15, 0));
         pila.apilar(Persona(3, "Australia", 7, 5, 39, 0));
         pila.apilar(Persona(4, "Sudafrica", 5, 7, 23, 0));
         pila.apilar(Persona(5, "Indonesia", 6, 10, 16, 0));
         pila.apilar(Persona(6, "Noruega", 4, 11, 23, 0));
+        pila.apilar(Persona(7, "Australia",7,14,31,0));
+        pila.apilar(Persona(8, "Italia",2,18,14,0));
+        pila.apilar(Persona(9, "Alemania",3,21,20,0));
 
         int opcion = 9;
         int id, prioridad, inicio, horario;
@@ -181,12 +187,14 @@ int main() {
                     opcion = 9;
                     break;
                 case 6:
-                    boxocupado = lista.peak();
-                    boxmenosoc = lista.final();
                     cout << "Box más ocupado: " << endl;
-                    boxocupado.mostrar();
+                    int mayor;
+                    mayor = lista.encontrarMayor(&lista);
+                    lista.obtener(mayor).mostrar();
                     cout << "Box menos ocupado: " << endl;
-                    boxmenosoc.mostrar();
+                    int menor;
+                    menor = lista.encontrarMayor(&lista);
+                    lista.obtener(menor).mostrar();
                     opcion = 9;
                     break;
                 case 5:
@@ -198,13 +206,13 @@ int main() {
                     int minutos;
                     cout << "Introduce el número de minutos a simular: ";
                     cin >> minutos;
-                    simulacion.simularMinutos(minutos);
+                    simulacionlista.simularMinutosLista(minutos);
                     opcion = 9;
                     break;
                 }
                 case 8:
                     cout << "Simulando todo el funcionamiento hasta que no haya pasajeros." << endl;
-                    simulacion.simularEntero();
+                    simulacionlista.simularEnteroLista();
                     opcion = 9;
                     break;
                 case 7:

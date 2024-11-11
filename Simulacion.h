@@ -4,7 +4,7 @@
 #include "Pila.h"
 #include "Cola.h"
 #include "Persona.h"
-#include <array>
+
 
 class Simulacion {
 private:
@@ -12,7 +12,8 @@ private:
     Cola& colaEspera;
     Cola box[3];
     Pila resfinal;
-    int tiemposim;
+    Pila aux;
+    int tiemposim = 0;
     int minutos;
     int acciones = 0;
     double media = 0.0;
@@ -24,7 +25,6 @@ public:
     void simularMinutos(int minutos);
     void mostrarBoxes();
     void simularEntero();
-    void Simular();
     void Boxear();
     void Boxeamiento();
     void Finalizar();
