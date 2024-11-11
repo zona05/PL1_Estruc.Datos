@@ -26,7 +26,7 @@ public:
     int vacios();
     bool todolleno();
     void OrdenaLista();
-
+    int encontrarMenor(Lista *lista);
 
 };
 

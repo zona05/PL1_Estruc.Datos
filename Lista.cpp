@@ -117,6 +117,29 @@ bool Lista::todolleno() {
     return boxesllenos == cntbox;
 }
 
+int Lista::encontrarMenor(Lista* lista) {
+    if (lista->EsVacia()) {
+        return -1; // Retorna -1 si la lista está vacía
+    }
+
+    int posicion_menor = 0; // Empezamos en la posición 1 (primer nodo)
+    int posicion_actual = 0; // Para llevar la cuenta de la posición actual
+    int longitud_menor = lista->primero->cola.longitud; // Longitud inicial de la primera cola
+
+    NodoLista* actual = lista->primero; // Comenzamos desde el primer nodo
+
+    while (actual != nullptr) {
+        if (actual->cola.longitud < longitud_menor) {
+            longitud_menor = actual->cola.longitud;
+            posicion_menor = posicion_actual; // Actualizamos la posición del menor
+        }
+        actual = actual->siguiente; // Avanzamos al siguiente nodo
+        posicion_actual++; // Aumentamos la posición
+    }
+
+    return posicion_menor;
+}
+
 void Lista::OrdenaLista() {
     if (EsVacia() || primero->siguiente == nullptr) {
 
