@@ -19,6 +19,7 @@ public:
     void mostrar();
     Persona peek();
 
+
 };
 
 #endif // PILA_H

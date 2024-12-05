@@ -14,7 +14,7 @@ int main() {
     cout << "Seleccione la parte que desea ejecutar:" << endl;
     cout << "1. Parte 1" << endl;
     cout << "2. Parte 2" << endl;
-    cout << "Ingrese su opción: ";
+    cout << "Ingrese su opcion: ";
     cin >> opcionMenu;
 
     if (opcionMenu == 1) {
@@ -22,15 +22,18 @@ int main() {
         Pila pila;
         Cola cola;
         Simulacion simulacion(pila, cola);
-        pila.apilar(Persona(1, "Indonesia", 6, 0, 20, 0));
+        pila.apilar(Persona(1, "Indonesia", 6, 0, 10, 0));
         pila.apilar(Persona(2, "Portugal", 1, 0, 15, 0));
-        pila.apilar(Persona(3, "Australia", 7, 5, 39, 0));
-        pila.apilar(Persona(4, "Sudafrica", 5, 7, 23, 0));
-        pila.apilar(Persona(5, "Indonesia", 6, 9, 16, 0));
-        pila.apilar(Persona(6, "Noruega", 4, 11, 23, 0));
-        pila.apilar(Persona(7, "Australia",7,14,31,0));
-        pila.apilar(Persona(8, "Italia",2,18,14,0));
-        pila.apilar(Persona(9, "Alemania",3,21,20,0));
+        pila.apilar(Persona(3, "Australia", 7, 5, 29, 0));
+        pila.apilar(Persona(4, "Sudafrica", 5, 7, 8, 0));
+        pila.apilar(Persona(5, "Australia", 7, 9, 16, 0));
+        pila.apilar(Persona(6, "Indonesia", 6, 9, 13, 0));
+        pila.apilar(Persona(7, "Indonesia",6,10,10,0));
+        pila.apilar(Persona(8, "Portugal",1,10,15,0));
+        pila.apilar(Persona(9, "Australia",7,15,29,0));
+        pila.apilar(Persona(10, "Sudafrica",5,17,8,0));
+        pila.apilar(Persona(11, "Australia",7,19,16,0));
+        pila.apilar(Persona(12, "Indonesia",6,19,13,0));
         int opcion = 9;
         int id, prioridad, inicio, horario;
         int tiempo = 0;
@@ -51,7 +54,7 @@ int main() {
                     cin >> horario;
 
                     pila.apilar(Persona(id, pais, prioridad, inicio, horario, tiempo));
-                    cout << "Pasajero añadido a la pila." << endl;
+                    cout << "Pasajero anadido a la pila." << endl;
 
                     opcion = 9;
                     break;
@@ -61,7 +64,7 @@ int main() {
                     if (!pila.esVacia()) {
                         pila.mostrar();
                     } else {
-                        cout << "La pila está vacía." << endl;
+                        cout << "La pila esta vacia." << endl;
                     }
                     opcion = 9;
                     break;
@@ -78,7 +81,7 @@ int main() {
                     if (!cola.esVacia()) {
                         cola.mostrar();
                     } else {
-                        cout << "La cola está vacía." << endl;
+                        cout << "La cola esta vacia." << endl;
                     }
                     opcion = 9;
                     break;
@@ -89,7 +92,7 @@ int main() {
                     break;
                 case 6: {
                     int minutos;
-                    cout << "Introduce el número de minutos a simular: ";
+                    cout << "Introduce el numero de minutos a simular: ";
                     cin >> minutos;
 
                     simulacion.simularMinutos(minutos);
@@ -102,12 +105,12 @@ int main() {
                     opcion = 9;
                     break;
                 case 8:
-                    cout << "No deseo realizar más acciones." << endl;
+                    cout << "No deseo realizar mas acciones." << endl;
                     start = true;
                     break;
                 case 9:
-                    cout << "Introduce un número dependiendo de la acción que quieras realizar:" << endl;
-                    cout << "1. Añadir un pasajero" << endl;
+                    cout << "Introduce un numero dependiendo de la accion que quieras realizar:" << endl;
+                    cout << "1. Anadir un pasajero" << endl;
                     cout << "2. Mostrar la pila de pasajeros" << endl;
                     cout << "3. Borrar la pila de pasajeros" << endl;
                     cout << "4. Mostrar la cola de espera de pasajeros" << endl;
@@ -119,7 +122,7 @@ int main() {
                     cin >> opcion;
                     break;
                 default:
-                    cout << "Opción no válida. Intente nuevamente." << endl;
+                    cout << "Opcion no válida. Intente nuevamente." << endl;
                     opcion = 9;
                     break;
             }
@@ -134,15 +137,18 @@ int main() {
         lista.AgregarOrdena(colainicio);
         lista.AgregarOrdena(colainicio);
         SimulacionLista simulacionlista(pila, lista);
-        pila.apilar(Persona(1, "Indonesia", 6, 0, 20, 0));
+        pila.apilar(Persona(1, "Indonesia", 6, 0, 10, 0));
         pila.apilar(Persona(2, "Portugal", 1, 0, 15, 0));
-        pila.apilar(Persona(3, "Australia", 7, 5, 39, 0));
-        pila.apilar(Persona(4, "Sudafrica", 5, 7, 23, 0));
-        pila.apilar(Persona(5, "Indonesia", 6, 10, 16, 0));
-        pila.apilar(Persona(6, "Noruega", 4, 11, 23, 0));
-        pila.apilar(Persona(7, "Australia",7,14,31,0));
-        pila.apilar(Persona(8, "Italia",2,18,14,0));
-        pila.apilar(Persona(9, "Alemania",3,21,20,0));
+        pila.apilar(Persona(3, "Australia", 7, 5, 29, 0));
+        pila.apilar(Persona(4, "Sudafrica", 5, 7, 8, 0));
+        pila.apilar(Persona(5, "Australia", 7, 9, 16, 0));
+        pila.apilar(Persona(6, "Indonesia", 6, 9, 13, 0));
+        pila.apilar(Persona(7, "Indonesia",6,10,10,0));
+        pila.apilar(Persona(8, "Portugal",1,10,15,0));
+        pila.apilar(Persona(9, "Australia",7,15,29,0));
+        pila.apilar(Persona(10, "Sudafrica",5,17,8,0));
+        pila.apilar(Persona(11, "Australia",7,19,16,0));
+        pila.apilar(Persona(12, "Indonesia",6,19,13,0));
 
         int opcion = 9;
         int id, prioridad, inicio, horario;
@@ -218,6 +224,7 @@ int main() {
                 case 7:
                     cout << "Número de boxes de atención operativos: " << lista.longitud() + 1 << endl;
                     start = true;
+                    opcion = 9;
                     break;
                 case 9:
                     cout << "Introduce un número dependiendo de la acción que quieras realizar:" << endl;

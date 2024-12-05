@@ -1,26 +1,30 @@
 #include "Cola.h"
 #include "NodoCola.h"
 #include <iostream>
-#include <stdexcept> // Para runtime_error
+#include <stdexcept>
 
 using namespace std;
 
+// Constructor: inicializa la cola vacía con primero, ultimo como nullptr y longitud en 0.
 Cola::Cola() {
     primero = nullptr;
     ultimo = nullptr;
     longitud = 0;
 }
 
+// Destructor: elimina todos los elementos de la cola, desencolando hasta vaciarla.
 Cola::~Cola() {
     while (!esVacia()) {
         desencolar();
     }
 }
 
+// esVacia: retorna true si la cola está vacía, es decir, si primero es nullptr.
 bool Cola::esVacia() {
     return primero == nullptr;
 }
 
+// encolar: añade un nuevo elemento (persona) al final de la cola.
 void Cola::encolar(Persona persona) {
     NodoCola* nuevo_nodo = new NodoCola(persona);
     if (esVacia()) {
@@ -31,8 +35,9 @@ void Cola::encolar(Persona persona) {
         ultimo = nuevo_nodo;
     }
     longitud++;
-
 }
+
+// encolar_ordenado: agrega una persona a la cola y luego ordena la cola por la prioridad de la persona (de mayor a menor).
 void Cola::encolar_ordenado(Persona persona) {
     NodoCola* nuevo_nodo = new NodoCola(persona);
     if (esVacia()) {
@@ -43,6 +48,8 @@ void Cola::encolar_ordenado(Persona persona) {
         ultimo = nuevo_nodo;
     }
     longitud++;
+
+    // Ordena la cola según la prioridad de la persona (orden descendente).
     for (NodoCola* i = primero; i != nullptr; i = i->siguiente) {
         for (NodoCola* j = primero; j->siguiente != nullptr; j = j->siguiente) {
             if (j->persona.prioridad < j->siguiente->persona.prioridad) {
@@ -52,11 +59,13 @@ void Cola::encolar_ordenado(Persona persona) {
     }
 }
 
+// desencolar: elimina y devuelve el primer elemento de la cola.
 Persona Cola::desencolar() {
     if (!esVacia()) {
         NodoCola* aux = primero;
         Persona p = primero->persona;
 
+        // Si la cola tiene un solo elemento, resetea ambos punteros a nullptr.
         if ((primero == ultimo) && (primero->siguiente == nullptr)) {
             primero = nullptr;
             ultimo = nullptr;
@@ -70,6 +79,7 @@ Persona Cola::desencolar() {
     throw runtime_error("La cola está vacía.");
 }
 
+// frente: devuelve el primer elemento de la cola sin eliminarlo.
 Persona &Cola::frente() {
     if (esVacia()) {
         throw runtime_error("La cola está vacía.");
@@ -77,6 +87,7 @@ Persona &Cola::frente() {
     return primero->persona;
 }
 
+// mostrar: muestra todos los elementos de la cola, incluyendo la información de cada persona.
 void Cola::mostrar() {
     NodoCola* actual = primero;
     while (actual != nullptr) {
@@ -89,14 +100,17 @@ void Cola::mostrar() {
         actual = actual->siguiente;
     }
 }
-void Cola:: incrementartiempo() {
+
+// incrementartiempo: aumenta el tiempo de cada persona en la cola en 1 minuto.
+void Cola::incrementartiempo() {
     NodoCola* actual = primero;
     while (actual != nullptr) {
-        actual ->persona.tiempo +=1;
-        actual= actual -> siguiente;
+        actual->persona.tiempo += 1;
+        actual = actual->siguiente;
     }
 }
 
+// obtenerPersona: devuelve una referencia a la persona en una posición dada de la cola (por índice).
 Persona& Cola::obtenerPersona(int posicion) {
     if (esVacia()) {
         throw std::out_of_range("No se puede obtener la persona, la cola está vacía.");
@@ -105,12 +119,10 @@ Persona& Cola::obtenerPersona(int posicion) {
         throw std::out_of_range("Índice fuera de rango.");
     }
 
-    NodoCola* actual = primero; // Comenzar desde el frente de la cola
+    NodoCola* actual = primero;
     for (int index = 0; index < posicion; ++index) {
-        actual = actual->siguiente; // Avanzar al siguiente nodo
+        actual = actual->siguiente;
     }
 
-    return actual->persona; // Retornar la referencia a la Persona en la posición 'posicion'
+    return actual->persona;
 }
-
-

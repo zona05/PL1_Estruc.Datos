@@ -4,15 +4,18 @@
 
 using namespace std;
 
+// Constructor: inicializa la simulación con las referencias a la pila de pasajeros y la lista de colas.
 SimulacionLista::SimulacionLista(Pila& pilaExterna, Lista& listaExterna) : pilaPasajeros(pilaExterna), lista(listaExterna) {}
 
-SimulacionLista::~SimulacionLista() {
-
+// Destructor: no se realiza ninguna acción adicional ya que no hay memoria dinámica.
+SimulacionLista::~SimulacionLista() {}
+Pila SimulacionLista::SacarResfinal() {
+    return resfinal;
 }
+// TraspasoLista: mueve los pasajeros de la pila hacia las colas en la lista,
+// dependiendo del tiempo de llegada del pasajero, y ordena la pila auxiliar.
 void SimulacionLista::TraspasoLista() {
-
-
-    while (!pilaPasajeros.esVacia()) { //pila a cola
+    while (!pilaPasajeros.esVacia()) {
         if (pilaPasajeros.peek().inicio == tiemposim) {
             int destinacion;
             destinacion = lista.encontrarMenor(&lista);
@@ -21,78 +24,85 @@ void SimulacionLista::TraspasoLista() {
             cout << "Pasajero " << pilaPasajeros.peek().id << " llega al aeropuerto en el minuto: " << tiemposim << endl;
         } else {
             aux.apilar(pilaPasajeros.peek());
-
         }
         pilaPasajeros.desapilar();
     }
+
     while (!aux.esVacia()) {
         pilaPasajeros.apilar(aux.peek());
         aux.desapilar();
     }
 }
+
+// BoxeamientoLista: atiende a los pasajeros en las colas de la lista,
+// decrementando su tiempo de atención y moviéndolos a la lista de resultados cuando son atendidos.
 void SimulacionLista::BoxeamientoLista() {
-    for (int k = 1; k < lista.longitud() +1 ; ++k) {  // Asumiendo que los índices comienzan en 1
-        Cola& colabox = lista.obtener(k);  // Obtener la cola actual
+    for (int k = 1; k < lista.longitud() + 1; ++k) {
+        Cola& colabox = lista.obtener(k);
 
-        // Aumentar el tiempo para todas las personas en la cola.
-        int totalPersonas = colabox.longitud;  // Obtener el número de personas en la cola
+        int totalPersonas = colabox.longitud;
 
-        // Aumentar el tiempo de todas las personas en la cola
         if (!colabox.esVacia()) {
-            for (int i = 0; i < totalPersonas ; ++i) {
-                Persona& persona = colabox.obtenerPersona(i);  // Obtener persona por índice
-                persona.tiempo++;  // Aumenta el tiempo de cada persona
+            for (int i = 0; i < totalPersonas; ++i) {
+                Persona& persona = colabox.obtenerPersona(i);
+                persona.tiempo++;
             }
         }
 
-        // Disminuir el horario solo para la persona al frente (primer elemento)
         if (totalPersonas > 0) {
-            Persona& frentePersona = colabox.frente();  // Obtener la persona al frente como referencia
-            frentePersona.horario--;  // Disminuir el horario
+            Persona& frentePersona = colabox.frente();
+            frentePersona.horario--;
 
-            // Comprobar si la persona ha terminado
             if (frentePersona.horario == 0) {
                 cout << "Pasajero " << frentePersona.id << " Sale del box: " << k
                      << " tras ser atendido en el minuto " << tiemposim + 1 << endl;
                 media += frentePersona.tiempo;
                 resfinal.apilar(frentePersona);
-                colabox.desencolar();  // Desencolar a la persona que terminó
+                colabox.desencolar();
                 acciones++;
             }
-            // Si no ha terminado, no hacemos nada (la dejamos en el frente)
         }
     }
 }
+
+// FinalizarLista: calcula la media de tiempo de los pasajeros, muestra el resultado de la simulación y
+// imprime el estado de las colas en los boxes al final.
 void SimulacionLista::FinalizarLista() {
-    media = media/acciones;
-    cout << "La media de tiempo de los pasajeros es " << media<< endl;
+    media = media / acciones;
+    cout << "La media de tiempo de los pasajeros es " << media << endl;
     while (!resfinal.esVacia()) {
         cout << "Pasajero " << resfinal.peek().id << ", tiempo ocupado en el aeropuerto: " << resfinal.peek().tiempo << endl;
         resfinal.desapilar();
     }
-    for (int m = 1; m < lista.longitud() +1 ; ++m) {
+    for (int m = 1; m < lista.longitud() + 1; ++m) {
         if (lista.obtener(m).longitud != 0) {
             cout << "El box " << m << " está ocupado por el pasajero: " << lista.obtener(m).frente().id << endl;
         }
     }
 }
+
+// QuitarBoxes: elimina los boxes que están vacíos si hay más de 2, buscando el box con mayor longitud.
 void SimulacionLista::QuitarBoxes() {
     if (lista.vacios() > 2) {
         for (int k = 0; k < lista.vacios(); ++k) {
             if (lista.longitud() > 1) {
-                int menor = lista.encontrarMayor(&lista);
+                int menor = lista.encontrarMenor(&lista);
                 lista.eliminarPos(menor);
-                 // Asegúrate de que Quitarultimo esté implementado
             }
         }
     }
 }
+
+// AgregarBoxes: agrega un nuevo box a la lista si todos los boxes están llenos.
 void SimulacionLista::AgregarBoxes() {
     if (lista.todolleno()) {
         Cola colatest;
         lista.AgregarOrdena(colatest);
     }
 }
+
+// simularMinutosLista: simula el funcionamiento del sistema durante un número específico de minutos,
+// realizando los traspasos, atendiendo a los pasajeros y ajustando el número de boxes disponibles.
 void SimulacionLista::simularMinutosLista(int minutos) {
     for (int i = 0; i < minutos; ++i) {
         cout << "Simulando minuto: " << tiemposim << endl;
@@ -105,8 +115,8 @@ void SimulacionLista::simularMinutosLista(int minutos) {
     FinalizarLista();
 }
 
-
-
+// simularEnteroLista: simula la operación completa hasta que todos los pasajeros hayan sido atendidos,
+// ajustando la cantidad de boxes disponibles según sea necesario.
 void SimulacionLista::simularEnteroLista() {
     tiemposim = 0;
     int a = pilaPasajeros.contar();
@@ -116,6 +126,7 @@ void SimulacionLista::simularEnteroLista() {
         QuitarBoxes();
         AgregarBoxes();
         tiemposim++;
+
     }
     FinalizarLista();
 

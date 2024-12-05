@@ -1,15 +1,18 @@
 #include "Cola.h"
 #include "NodoLista.h"
 
-NodoLista :: NodoLista() {
+// Constructor por defecto: inicializa una Cola vacía y el puntero siguiente en nullptr.
+NodoLista::NodoLista() {
     cola = Cola();
     siguiente = nullptr;
 }
 
-NodoLista::NodoLista(Cola c,NodoLista*sig) {
+// Constructor con parámetros: inicializa el nodo con una Cola y el puntero al siguiente nodo.
+NodoLista::NodoLista(Cola c, NodoLista* sig) {
     cola = c;
     siguiente = sig;
 }
-NodoLista::~NodoLista() {
 
+// Destructor: no realiza ninguna acción específica.
+NodoLista::~NodoLista() {
 }

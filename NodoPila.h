@@ -12,4 +12,4 @@ public:
     ~NodoPila();
 };
 
-#endif // NODOPILA_H
+#endif

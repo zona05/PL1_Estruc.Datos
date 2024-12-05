@@ -21,7 +21,7 @@ public:
     Persona desencolar();
 
     Persona &frente();
-    void mostrar(); // Agrega la declaración
+    void mostrar();
     void incrementartiempo();
     Persona& obtenerPersona(int posicion);
     void encolar_ordenado(Persona persona);

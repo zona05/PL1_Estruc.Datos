@@ -18,4 +18,4 @@ struct Persona {
     ~Persona();
 };
 
-#endif  // PERSONA_H
+#endif

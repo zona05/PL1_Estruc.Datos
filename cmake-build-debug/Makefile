@@ -47,19 +47,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\CLion\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\CLion\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Migui\CLionProjects\PL1_Estruc.Datos
+CMAKE_SOURCE_DIR = C:\Users\javie\CLionProjects\untitled\pl1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Migui\CLionProjects\PL1_Estruc.Datos\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\javie\CLionProjects\untitled\pl1\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -67,7 +67,7 @@ CMAKE_BINARY_DIR = C:\Users\Migui\CLionProjects\PL1_Estruc.Datos\cmake-build-deb
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
-	"D:\CLion\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
+	"C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -77,7 +77,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	"D:\CLion\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"C:\Program Files\JetBrains\CLion 2024.2.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Migui\CLionProjects\PL1_Estruc.Datos\cmake-build-debug\CMakeFiles C:\Users\Migui\CLionProjects\PL1_Estruc.Datos\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\javie\CLionProjects\untitled\pl1\cmake-build-debug\CMakeFiles C:\Users\javie\CLionProjects\untitled\pl1\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Migui\CLionProjects\PL1_Estruc.Datos\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\javie\CLionProjects\untitled\pl1\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -127,6 +127,30 @@ untitled: cmake_check_build_system
 untitled/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/build
 .PHONY : untitled/fast
+
+ABB.obj: ABB.cpp.obj
+.PHONY : ABB.obj
+
+# target to build an object file
+ABB.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/ABB.cpp.obj
+.PHONY : ABB.cpp.obj
+
+ABB.i: ABB.cpp.i
+.PHONY : ABB.i
+
+# target to preprocess a source file
+ABB.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/ABB.cpp.i
+.PHONY : ABB.cpp.i
+
+ABB.s: ABB.cpp.s
+.PHONY : ABB.s
+
+# target to generate assembly for a file
+ABB.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/ABB.cpp.s
+.PHONY : ABB.cpp.s
 
 Cola.obj: Cola.cpp.obj
 .PHONY : Cola.obj
@@ -175,6 +199,30 @@ Lista.s: Lista.cpp.s
 Lista.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/Lista.cpp.s
 .PHONY : Lista.cpp.s
+
+NodoABB.obj: NodoABB.cpp.obj
+.PHONY : NodoABB.obj
+
+# target to build an object file
+NodoABB.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/NodoABB.cpp.obj
+.PHONY : NodoABB.cpp.obj
+
+NodoABB.i: NodoABB.cpp.i
+.PHONY : NodoABB.i
+
+# target to preprocess a source file
+NodoABB.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/NodoABB.cpp.i
+.PHONY : NodoABB.cpp.i
+
+NodoABB.s: NodoABB.cpp.s
+.PHONY : NodoABB.s
+
+# target to generate assembly for a file
+NodoABB.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\untitled.dir\build.make CMakeFiles/untitled.dir/NodoABB.cpp.s
+.PHONY : NodoABB.cpp.s
 
 NodoCola.obj: NodoCola.cpp.obj
 .PHONY : NodoCola.obj
@@ -377,12 +425,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... untitled
+	@echo ... ABB.obj
+	@echo ... ABB.i
+	@echo ... ABB.s
 	@echo ... Cola.obj
 	@echo ... Cola.i
 	@echo ... Cola.s
 	@echo ... Lista.obj
 	@echo ... Lista.i
 	@echo ... Lista.s
+	@echo ... NodoABB.obj
+	@echo ... NodoABB.i
+	@echo ... NodoABB.s
 	@echo ... NodoCola.obj
 	@echo ... NodoCola.i
 	@echo ... NodoCola.s
