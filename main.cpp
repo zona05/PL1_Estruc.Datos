@@ -4,7 +4,7 @@
 #include "Simulacion.h"
 #include "SimulacionLista.h"
 #include "Lista.h"
-
+#include "ABB.h"
 using namespace std;
 
 int main() {
@@ -129,14 +129,18 @@ int main() {
         }
     }
     else if (opcionMenu == 2) {
-
+        ABB abb2;
         Pila pila;
         Lista lista;
+        Lista lista2;
         Cola colainicio;
+
+        NodoABB* nodo_max = nullptr;
+        NodoABB* nodo_min = nullptr;
         lista.AgregarOrdena(colainicio);
         lista.AgregarOrdena(colainicio);
         lista.AgregarOrdena(colainicio);
-        SimulacionLista simulacionlista(pila, lista);
+        SimulacionLista simulacionlista(pila, lista,abb2);
         pila.apilar(Persona(1, "Indonesia", 6, 0, 10, 0));
         pila.apilar(Persona(2, "Portugal", 1, 0, 15, 0));
         pila.apilar(Persona(3, "Australia", 7, 5, 29, 0));
@@ -149,7 +153,7 @@ int main() {
         pila.apilar(Persona(10, "Sudafrica",5,17,8,0));
         pila.apilar(Persona(11, "Australia",7,19,16,0));
         pila.apilar(Persona(12, "Indonesia",6,19,13,0));
-
+        string pais = "";
         int opcion = 9;
         int id, prioridad, inicio, horario;
         int tiempo = 0;
@@ -241,9 +245,46 @@ int main() {
                     cin >> opcion;
                     break;
                 case 10:
-                    cout << "No deseo realizar más acciones." << endl;
+                    cout << "Mostrando datos en ABBpasajeros" << endl;
+                    abb2.verDatos();
+                    opcion = 9;
+                    break;
+                case 11:
+                    cout << "De que pais deseas saber los pasajeros" << endl;
+                    cin >> pais;
+                    abb2.verPais(pais);
+                    opcion = 9;
                     start = true;
                     break;
+                case 12:
+                    cout << "Mostrando todos los paises" << endl;
+                    abb2.verPreorden();
+                    opcion = 9;
+                start = true;
+                break;
+                case 13:
+                    cout << "Mostrando el pais con mayor y menor numero de pasajeros." << endl;
+                    abb2.mayorymenor(abb2.raiz, nodo_max,nodo_min);
+                    opcion = 9;
+                start = true;
+                break;
+                case 14:
+                    cout << "De que pais deseas saber el tiempo medio" << endl;
+                    cin >> pais;
+                    abb2.vertmpomedio(pais);
+                    opcion = 9;
+                start = true;
+                break;
+                case 15:
+                    cout << "Mostrando el tiempo medio de cada pais" << endl;
+                    abb2.vertmpomediotodos();
+                    opcion = 9;
+                start = true;
+                break;
+                case 16:
+                    cout << "No deseo realizar más acciones." << endl;
+                start = true;
+                break;
                 default:
                     cout << "Opción no válida. Intente nuevamente." << endl;
                     opcion = 9;

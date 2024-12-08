@@ -14,7 +14,7 @@ class ABB {
 public:
     ABB();
     ABB(NodoABB* r);
-    ABB(string nom, NodoABB* hIz = nullptr, NodoABB* hDer = nullptr, Lista lista);
+
 
     virtual ~ABB();
 
@@ -25,11 +25,10 @@ public:
     void mayorymenor(NodoABB* raiz,NodoABB*& nodo_max, NodoABB*& nodo_min);
 
 
-protected:
 
     void verPreorden();
     void verPreorden2(NodoABB* arb);
-    void buscarOInsertar( string nom, Lista lista,SimulacionLista simulacion);
+/*    void buscarOInsertar(Lista lista,SimulacionLista simulacion); */
     void vertmpomedio(string pais);
     void vertmpomedio2(NodoABB* arb ,string pais);
     void vertmpomediotodos();
@@ -38,8 +37,9 @@ protected:
     void verPais2(NodoABB* arb, string pais);
     void verDatos();
     void verDatos2(NodoABB* arb);
+    void insertarteclado(Persona persona);
 
-private:
+
     NodoABB* raiz;
 };
 

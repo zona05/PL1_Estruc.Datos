@@ -5,11 +5,7 @@ ABB::ABB() : raiz(nullptr) {}
 
 ABB::ABB(NodoABB* r) : raiz(r) {}
 
-ABB::ABB(string nom, NodoABB* hIz, NodoABB* hDer, Lista lista) {
-    raiz = new NodoABB(nom, lista);
-    raiz->hi = hIz;
-    raiz->hd = hDer;
-}
+
 
 ABB::~ABB() {
     destruirArbol(raiz);
@@ -91,8 +87,8 @@ void ABB::vertmpomediotodos2(NodoABB* arb) {
     }
 }
 
-
-void ABB::buscarOInsertar(string nom, Lista lista, SimulacionLista simulacion) {
+/*
+void ABB::buscarOInsertar(Lista lista, SimulacionLista simulacion) {
     if (simulacion.SacarResfinal().esVacia()) {
         cout << "Simulación vacía, no se puede procesar." << endl;
         return;
@@ -132,10 +128,10 @@ void ABB::buscarOInsertar(string nom, Lista lista, SimulacionLista simulacion) {
         padre->hd = nuevoNodo;
     }
 
-    cout << "Nuevo nodo creado: " << nom << endl;
+
 }
 
-
+ */
 int ABB::comparaAlfabeto(string str1, string str2){
     for(int i = 0; i < str1.length() && i < str2.length(); i++){
         if(str1[i] == str2[i]) {
@@ -177,4 +173,43 @@ void ABB::mayorymenor( NodoABB* raiz,NodoABB*& nodo_max, NodoABB*& nodo_min) {
     }
 }
 
+void ABB::insertarteclado(Persona persona) {
 
+
+
+    string str2 = persona.pais;
+
+    NodoABB* actual = raiz;
+    NodoABB* padre = nullptr;
+
+    // Buscar el nodo con el ID correspondiente
+    while (actual != nullptr) {
+        if (!actual->lista.peak().esVacia() &&  comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 0) {
+            actual->lista.peak().encolar(persona);
+            cout << "Nodo encontrado: " << actual->nombre << endl;
+            return;
+        }
+        padre = actual;
+        padre->lista.peak().encolar(persona);
+        if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 1) {
+            actual = actual->hi;
+        } else {
+            actual = actual->hd;
+        }
+    }
+
+    // Crear un nuevo nodo si no se encontró el ID
+    Lista nuevaLista;
+    nuevaLista.peak().encolar(persona);
+
+    NodoABB* nuevoNodo = new NodoABB(persona.pais, nuevaLista);
+
+    if (padre == nullptr) {
+        raiz = nuevoNodo;
+    } else if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 1) {
+        padre->hi = nuevoNodo;
+    } else if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 2) {
+        padre->hd = nuevoNodo;
+    }
+
+}

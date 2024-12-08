@@ -3,12 +3,14 @@
 #include "Pila.h"
 #include "Cola.h"
 #include "Lista.h"
+#include "ABB.h"
 
 
 class SimulacionLista {
 public:
     Pila& pilaPasajeros;
     Lista& lista;
+    ABB& abb2;
     Pila resfinal;
     Pila aux;
     int tiemposim = 0;
@@ -17,7 +19,7 @@ public:
     double media = 0.0;
 
 
-    SimulacionLista(Pila& pilaExterna, Lista& listaExterna);
+    SimulacionLista(Pila& pilaExterna, Lista& listaExterna, ABB& abbExterna);
     ~SimulacionLista();
 
 

@@ -23,5 +23,6 @@ add_executable(untitled main.cpp
         SimulacionLista.cpp
         ABB.cpp
         ABB.h
+        NodoABB.h
         NodoABB.cpp
-        NodoABB.h)
+        )
