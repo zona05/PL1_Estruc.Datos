@@ -100,7 +100,13 @@ void Cola::mostrar() {
         actual = actual->siguiente;
     }
 }
-
+void Cola::mostrar2() {
+    NodoCola* actual = primero;
+    while (actual != nullptr) {
+        cout << "ID: " << actual->persona.id << ", Tiempo: " << actual->persona.tiempo<< endl;
+        actual = actual->siguiente;
+    }
+}
 // incrementartiempo: aumenta el tiempo de cada persona en la cola en 1 minuto.
 void Cola::incrementartiempo() {
     NodoCola* actual = primero;
@@ -108,6 +114,32 @@ void Cola::incrementartiempo() {
         actual->persona.tiempo += 1;
         actual = actual->siguiente;
     }
+}
+
+int Cola::longitudcola () {
+    int contador = 0;
+    NodoCola* actual = primero;
+    while (actual != nullptr) {
+        contador = contador + 1;
+        actual = actual->siguiente;
+    }
+    return contador;
+
+}
+float Cola::tiempomedio() {
+    if (primero == nullptr) { // Si la cola está vacía
+        return 0.0; // Tiempo medio es 0
+    }
+    int sumaTiempo = 0;  // Acumulador para los tiempos
+    NodoCola* actual = primero; // Comenzar desde el primer nodo
+    while (actual != nullptr) {
+        sumaTiempo += actual->persona.tiempo; // Sumar el tiempo del nodo actual
+        actual = actual->siguiente;  // Avanzar al siguiente nodo
+    }
+
+    // Calcular la media dividiendo la suma total entre el número de nodos
+    return sumaTiempo / longitudcola();
+
 }
 
 // obtenerPersona: devuelve una referencia a la persona en una posición dada de la cola (por índice).

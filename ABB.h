@@ -22,14 +22,22 @@ public:
     void destruirArbol(NodoABB* nodo);
     int comparaAlfabeto(string str1, string str2);
     void mostrarNodo(NodoABB* nodo);
-    void mayorPais2(NodoABB* nodo);
-    void mayorPais();
+    void mayorymenor(NodoABB* raiz,NodoABB*& nodo_max, NodoABB*& nodo_min);
+
 
 protected:
 
-    void verInOrden();
-    void verInOrden2(NodoABB* arb);
+    void verPreorden();
+    void verPreorden2(NodoABB* arb);
     void buscarOInsertar( string nom, Lista lista,SimulacionLista simulacion);
+    void vertmpomedio(string pais);
+    void vertmpomedio2(NodoABB* arb ,string pais);
+    void vertmpomediotodos();
+    void vertmpomediotodos2(NodoABB* arb);
+    void verPais(string pais);
+    void verPais2(NodoABB* arb, string pais);
+    void verDatos();
+    void verDatos2(NodoABB* arb);
 
 private:
     NodoABB* raiz;

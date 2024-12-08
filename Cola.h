@@ -19,12 +19,14 @@ public:
     void encolar(Persona persona);
     void encolarprioridad(Persona persona);
     Persona desencolar();
-
+    int  longitudcola ();
+    float tiempomedio();
     Persona &frente();
     void mostrar();
     void incrementartiempo();
     Persona& obtenerPersona(int posicion);
     void encolar_ordenado(Persona persona);
+    void mostrar2();
 };
 
 #endif //COLA_H

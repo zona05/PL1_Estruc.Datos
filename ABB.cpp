@@ -22,37 +22,72 @@ void ABB::destruirArbol(NodoABB* nodo) {
         delete nodo;
     }
 }
-
-void ABB::verInOrden() {
-    verInOrden2(raiz);
+void ABB::verPais(string pais) {
+    verPais2(raiz,pais);
 }
 
-void ABB::verInOrden2(NodoABB* arb) {
+void ABB::verPais2(NodoABB* arb,string pais) {
     NodoABB* actual = arb;
-
-    while (actual != nullptr) {
-        if (actual->hi == nullptr) {
-            // Si no hay hijo izquierdo, procesamos el nodo y vamos al derecho.
-            mostrarNodo(actual);
-            actual = actual->hd;
-        } else {
-            // Encontramos el predecesor en el subárbol izquierdo.
-            NodoABB* predecesor = actual->hi;
-            while (predecesor->hd != nullptr && predecesor->hd != actual) {
-                predecesor = predecesor->hd;
-            }
-
-            if (predecesor->hd == nullptr) {
-                // Hacemos un enlace temporal al nodo actual.
-                predecesor->hd = actual;
-                actual = actual->hi;
-            } else {
-                // Eliminamos el enlace temporal y procesamos el nodo.
-                predecesor->hd = nullptr;
-                mostrarNodo(actual);
-                actual = actual->hd;
-            }
+    if (arb != nullptr) {
+        if (actual->lista.peak().frente().pais == pais) {
+            actual->lista.peak().mostrar();
         }
+        verPais2(arb->hi,pais);    // Recorrer subárbol izquierdo
+        verPais2(arb-> hd,pais);      // Recorrer subárbol derecho
+    }
+}
+void ABB::verDatos() {
+    verPreorden2(raiz);
+}
+
+void ABB::verDatos2(NodoABB* arb) {
+
+    if (arb != nullptr) {
+        cout <<  arb->lista.peak().frente().pais <<   endl;
+        arb->lista.peak().mostrar2();
+        verDatos2(arb->hi);    // Recorrer subárbol izquierdo
+        verDatos2(arb-> hd);      // Recorrer subárbol derecho
+    }
+}
+
+void ABB::verPreorden() {
+    verPreorden2(raiz);
+}
+
+void ABB::verPreorden2(NodoABB* arb) {
+
+    if (arb != nullptr) {
+        cout <<  arb->lista.peak().frente().pais <<  endl;
+        verPreorden2(arb->hi);    // Recorrer subárbol izquierdo
+        verPreorden2(arb-> hd);      // Recorrer subárbol derecho
+    }
+}
+void ABB::vertmpomedio(string pais) {
+    vertmpomedio2(raiz,pais);
+}
+
+
+void ABB::vertmpomedio2(NodoABB* arb ,string pais) {
+    NodoABB* actual = arb;
+    if (actual!= nullptr) {
+        if (actual->lista.peak().frente().pais == pais) {
+        cout << "La media de tiempo del pais" << pais << "es"<<  actual->lista.peak().tiempomedio() << endl;
+        }
+        vertmpomedio2(actual->hi, pais);    // Recorrer subárbol izquierdo
+        vertmpomedio2(actual-> hd, pais);      // Recorrer subárbol derecho
+    }
+}
+void ABB::vertmpomediotodos() {
+    vertmpomediotodos2(raiz);
+}
+
+
+void ABB::vertmpomediotodos2(NodoABB* arb) {
+    NodoABB* actual = arb;
+    if (actual!= nullptr) {
+            cout << "La media de tiempo del pais" << actual->lista.peak().frente().pais << "es"<<  actual->lista.peak().tiempomedio() << endl;
+        vertmpomediotodos2(actual->hi);    // Recorrer subárbol izquierdo
+        vertmpomediotodos2(actual-> hd);      // Recorrer subárbol derecho
     }
 }
 
@@ -122,16 +157,24 @@ void ABB::mostrarNodo(NodoABB* nodo) {
     nodo->lista.mostrarLista();
 }
 
-void ABB::mayorPais2(NodoABB* arb) {
-    NodoABB* nodoMayor = arb;
-    NodoABB* nodoMenor = arb;
-    if (arb != nullptr) {
-        verInOrden2(arb->hi);
-        mostrarNodo(arb);
-        verInOrden2(arb->hd);
+void ABB::mayorymenor( NodoABB* raiz,NodoABB*& nodo_max, NodoABB*& nodo_min) {
+    if (raiz != nullptr) {
+        int longitud_actual = raiz->lista.longitud();
+
+        // Actualizar el nodo con la lista más larga
+        if (nodo_max == nullptr || longitud_actual > nodo_max->lista.peak().longitudcola()) {
+            nodo_max = raiz;
+        }
+
+        // Actualizar el nodo con la lista más corta
+        if (nodo_max == nullptr || longitud_actual > nodo_min->lista.longitud()) {
+            nodo_min = raiz;
+        }
+
+        // Recorrer los subárboles izquierdo y derecho
+        mayorymenor(raiz->hi, nodo_max, nodo_min);
+        mayorymenor(raiz->hd, nodo_max, nodo_min);
     }
 }
 
-void ABB::mayorPais() {
-    mayorPais2(raiz);
-}
+
