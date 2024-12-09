@@ -1,8 +1,15 @@
 #include "NodoABB.h"
 
-
-NodoABB::NodoABB( string nombre, Lista lista)
-    : nombre(nombre), lista(lista), hi(nullptr), hd(nullptr) {}
+NodoABB::NodoABB() {
+    nombre = "";
+    lista = Lista();
+    hi = nullptr;
+    hd = nullptr;
+}
+NodoABB::NodoABB( string nombre, const Lista& lista)
+    : nombre(nombre), lista(lista), hi(nullptr), hd(nullptr) {
+    cout << "Nodo creado: " << nombre << endl;
+}
 
 NodoABB::~NodoABB() {}
 

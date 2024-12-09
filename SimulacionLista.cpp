@@ -1,11 +1,11 @@
-#include "ABB.h"
+
 #include "SimulacionLista.h"
 #include <iostream>
 
 using namespace std;
 
 // Constructor: inicializa la simulación con las referencias a la pila de pasajeros y la lista de colas.
-SimulacionLista::SimulacionLista(Pila& pilaExterna, Lista& listaExterna, ABB& abbExterna) : pilaPasajeros(pilaExterna), lista(listaExterna), abb2(abbExterna) {}
+SimulacionLista::SimulacionLista(Pila& pilaExterna, Lista& listaExterna, ABB& abbexterna) : pilaPasajeros(pilaExterna), lista(listaExterna), abb2(abbexterna) {}
 
 // Destructor: no se realiza ninguna acción adicional ya que no hay memoria dinámica.
 SimulacionLista::~SimulacionLista() {}
@@ -58,9 +58,11 @@ void SimulacionLista::BoxeamientoLista() {
                      << " tras ser atendido en el minuto " << tiemposim + 1 << endl;
                 media += frentePersona.tiempo;
                 resfinal.apilar(frentePersona);
+                abb2.insertarteclado(frentePersona);
                 colabox.desencolar();
                 acciones++;
-                abb2.insertarteclado(frentePersona);
+
+
 
             }
         }
@@ -110,7 +112,7 @@ void SimulacionLista::simularMinutosLista(int minutos) {
         cout << "Simulando minuto: " << tiemposim << endl;
         TraspasoLista();
         BoxeamientoLista();
-        QuitarBoxes();
+
         AgregarBoxes();
         tiemposim++;
     }

@@ -1,10 +1,8 @@
 #include "ABB.h"
 #include "SimulacionLista.h"
+#include <iostream>
 
 ABB::ABB() : raiz(nullptr) {}
-
-ABB::ABB(NodoABB* r) : raiz(r) {}
-
 
 
 ABB::~ABB() {
@@ -135,7 +133,7 @@ void ABB::buscarOInsertar(Lista lista, SimulacionLista simulacion) {
 int ABB::comparaAlfabeto(string str1, string str2){
     for(int i = 0; i < str1.length() && i < str2.length(); i++){
         if(str1[i] == str2[i]) {
-            i++;
+
         }
         else if(str1[i] > str2[i]){
             return 1;
@@ -174,42 +172,68 @@ void ABB::mayorymenor( NodoABB* raiz,NodoABB*& nodo_max, NodoABB*& nodo_min) {
 }
 
 void ABB::insertarteclado(Persona persona) {
-
-
-
-    string str2 = persona.pais;
-
+    Cola cola;
+    string pais = persona.pais;
     NodoABB* actual = raiz;
     NodoABB* padre = nullptr;
 
-    // Buscar el nodo con el ID correspondiente
+    // Buscar el nodo donde insertar
     while (actual != nullptr) {
-        if (!actual->lista.peak().esVacia() &&  comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 0) {
-            actual->lista.peak().encolar(persona);
-            cout << "Nodo encontrado: " << actual->nombre << endl;
+        if (!actual->lista.peak().esVacia()) {
+            // Si encontramos el nodo con el país, agregamos la persona
+            if (actual->lista.peak().frente().pais == pais) {
+                actual->lista.peak().encolar(persona);
+                cout << "Nodo encontrado: " << actual->nombre << endl;
+                return;  // Ya hemos insertado la persona, no hacemos nada más
+            }
+
+            // Decidir si ir al subárbol izquierdo o derecho
+            padre = actual; // Mantener el rastro del padre
+            if (actual->lista.peak().frente().pais > persona.pais) {
+                actual = actual->hi;  // Ir al subárbol izquierdo
+            } else {
+                actual = actual->hd;  // Ir al subárbol derecho
+            }
+        } else {
+            // Si la lista está vacía, salimos del bucle
+            break;
+        }
+    }
+
+    // Crear un nuevo nodo si no se encontró el país
+    Lista nuevaLista;
+    nuevaLista.AgregarOrdena(cola); // Se asegura de agregar una cola
+    nuevaLista.peak().encolar(persona); // Encolar la persona en la lista
+    NodoABB* nuevoNodo = new NodoABB();
+    nuevoNodo -> nombre = persona.pais;
+    nuevoNodo->lista = nuevaLista;
+    cout << "Nuevo nodo creado para el país: " << persona.pais << endl;
+
+        // Si el árbol está vacío, asignamos el nuevo nodo como la raíz
+        if (raiz == nullptr) {
+            raiz = nuevoNodo;
+            cout << "Nuevo nodo es la raíz del árbol." << endl;
             return;
         }
-        padre = actual;
-        padre->lista.peak().encolar(persona);
-        if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 1) {
-            actual = actual->hi;
-        } else {
-            actual = actual->hd;
+
+        // Ahora inserta el nuevo nodo en el árbol binario
+        actual = raiz;
+        while (actual != nullptr) {
+            padre = actual; // Mantener el rastro del padre
+            if (persona.pais < actual->nombre) {
+                actual = actual->hi;
+            } else {
+                actual = actual->hd;
+            }
         }
-    }
 
-    // Crear un nuevo nodo si no se encontró el ID
-    Lista nuevaLista;
-    nuevaLista.peak().encolar(persona);
-
-    NodoABB* nuevoNodo = new NodoABB(persona.pais, nuevaLista);
-
-    if (padre == nullptr) {
-        raiz = nuevoNodo;
-    } else if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 1) {
-        padre->hi = nuevoNodo;
-    } else if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 2) {
-        padre->hd = nuevoNodo;
-    }
+        // Inserta el nuevo nodo en el lugar correcto
+        if (persona.pais < padre->nombre) {
+            padre->hi = nuevoNodo;
+            cout << "Nodo insertado a la izquierda de: " << padre->nombre << endl;
+        } else {
+            padre->hd = nuevoNodo;
+            cout << "Nodo insertado a la derecha de: " << padre->nombre << endl;
+        }
 
 }

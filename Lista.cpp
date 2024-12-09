@@ -63,9 +63,8 @@ void Lista::AgregarOrdena(Cola cola) {
 
 // Quitarultimo: elimina el último nodo de la lista.
 void Lista::Quitarultimo() {
-    NodoLista* aux;
     if (cntbox >= 2) {
-        aux = primero;
+        NodoLista* aux = primero;
         while (aux->siguiente->siguiente != nullptr) {
             aux = aux->siguiente;
         }

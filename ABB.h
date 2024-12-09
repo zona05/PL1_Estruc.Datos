@@ -5,7 +5,7 @@
 #include <string>
 #include "NodoABB.h"
 #include "Lista.h"
-#include "SimulacionLista.h"
+
 #include "Pila.h"
 
 using namespace std;
