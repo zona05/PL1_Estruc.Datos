@@ -73,6 +73,16 @@ void Lista::Quitarultimo() {
         cntbox--;
     }
 }
+void Lista::Quitar() {
+        NodoLista* aux = primero;
+        while (aux->siguiente != nullptr) {
+            aux = aux->siguiente;
+        }
+        ultimo = aux;
+        ultimo->siguiente = nullptr;
+        cntbox--;
+
+}
 
 // mostrarLista: muestra todas las colas de los nodos en la lista, indicando cuál box corresponde a cada una.
 void Lista::mostrarLista() {
@@ -233,6 +243,6 @@ void Lista::eliminarPos(int n) {
 // Destructor: elimina todos los nodos de la lista y libera la memoria.
 Lista::~Lista() {
     while (!EsVacia()) {
-        Quitarultimo();
+        Quitar();
     }
 }

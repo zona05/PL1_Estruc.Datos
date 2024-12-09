@@ -40,6 +40,7 @@ public:
     void insertarteclado(Persona persona);
 
 
+
     NodoABB* raiz;
 };
 

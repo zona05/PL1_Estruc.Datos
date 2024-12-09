@@ -246,38 +246,38 @@ int main() {
                     break;
                 case 10:
                     cout << "Mostrando datos en ABBpasajeros" << endl;
-                    abb2.verDatos();
+                    simulacionlista.abb2.verDatos();
                     opcion = 9;
                     break;
                 case 11:
                     cout << "De que pais deseas saber los pasajeros" << endl;
                     cin >> pais;
-                    abb2.verPais(pais);
+                     simulacionlista.abb2.verPais(pais);
                     opcion = 9;
                     start = true;
                     break;
                 case 12:
                     cout << "Mostrando todos los paises" << endl;
-                    abb2.verPreorden();
+                     simulacionlista.abb2.verPreorden();
                     opcion = 9;
                 start = true;
                 break;
                 case 13:
                     cout << "Mostrando el pais con mayor y menor numero de pasajeros." << endl;
-                    abb2.mayorymenor(abb2.raiz, nodo_max,nodo_min);
+                     simulacionlista.abb2.mayorymenor(abb2.raiz, nodo_max,nodo_min);
                     opcion = 9;
                 start = true;
                 break;
                 case 14:
                     cout << "De que pais deseas saber el tiempo medio" << endl;
                     cin >> pais;
-                    abb2.vertmpomedio(pais);
+                     simulacionlista.abb2.vertmpomedio(pais);
                     opcion = 9;
                 start = true;
                 break;
                 case 15:
                     cout << "Mostrando el tiempo medio de cada pais" << endl;
-                    abb2.vertmpomediotodos();
+                     simulacionlista.abb2.vertmpomediotodos();
                     opcion = 9;
                 start = true;
                 break;
@@ -285,6 +285,23 @@ int main() {
                     cout << "No deseo realizar más acciones." << endl;
                 start = true;
                 break;
+                case 17:
+
+                    cout << "Introduce el ID del pasajero: ";
+                    cin >> id;
+                    cout << "Introduce el país del pasajero: ";
+                    cin >> pais;
+                    cout << "Introduce la prioridad del pasajero: ";
+                    cin >> prioridad;
+                    cout << "Introduce el minuto de llegada al aeropuerto: ";
+                    cin >> inicio;
+
+
+                    simulacionlista.abb2.insertarteclado(Persona(id, pais, prioridad, inicio, horario, tiempo));
+                    cout << "Pasajero añadido a ABB." << endl;
+
+                    opcion = 9;
+                    break;
                 default:
                     cout << "Opción no válida. Intente nuevamente." << endl;
                     opcion = 9;

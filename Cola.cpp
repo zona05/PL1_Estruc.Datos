@@ -126,7 +126,7 @@ int Cola::longitudcola () {
     return contador;
 
 }
-float Cola::tiempomedio() {
+double Cola::tiempomedio() {
     if (primero == nullptr) { // Si la cola está vacía
         return 0.0; // Tiempo medio es 0
     }
@@ -138,7 +138,7 @@ float Cola::tiempomedio() {
     }
 
     // Calcular la media dividiendo la suma total entre el número de nodos
-    return sumaTiempo / longitudcola();
+    return sumaTiempo ;
 
 }
 

@@ -30,8 +30,9 @@ void ABB::verPais2(NodoABB* arb,string pais) {
         verPais2(arb-> hd,pais);      // Recorrer subárbol derecho
     }
 }
+
 void ABB::verDatos() {
-    verPreorden2(raiz);
+    verDatos2(raiz);
 }
 
 void ABB::verDatos2(NodoABB* arb) {
@@ -51,8 +52,9 @@ void ABB::verPreorden() {
 void ABB::verPreorden2(NodoABB* arb) {
 
     if (arb != nullptr) {
-        cout <<  arb->lista.peak().frente().pais <<  endl;
-        verPreorden2(arb->hi);    // Recorrer subárbol izquierdo
+
+        verPreorden2(arb->hi);
+        cout <<  arb->lista.peak().frente().pais <<  endl;// Recorrer subárbol izquierdo
         verPreorden2(arb-> hd);      // Recorrer subárbol derecho
     }
 }
@@ -65,7 +67,7 @@ void ABB::vertmpomedio2(NodoABB* arb ,string pais) {
     NodoABB* actual = arb;
     if (actual!= nullptr) {
         if (actual->lista.peak().frente().pais == pais) {
-        cout << "La media de tiempo del pais" << pais << "es"<<  actual->lista.peak().tiempomedio() << endl;
+        cout << "La media de tiempo del pais " << pais << " es "<<  actual->lista.peak().tiempomedio() / actual ->lista.peak().longitud << endl;
         }
         vertmpomedio2(actual->hi, pais);    // Recorrer subárbol izquierdo
         vertmpomedio2(actual-> hd, pais);      // Recorrer subárbol derecho
@@ -79,57 +81,13 @@ void ABB::vertmpomediotodos() {
 void ABB::vertmpomediotodos2(NodoABB* arb) {
     NodoABB* actual = arb;
     if (actual!= nullptr) {
-            cout << "La media de tiempo del pais" << actual->lista.peak().frente().pais << "es"<<  actual->lista.peak().tiempomedio() << endl;
+            cout << "La media de tiempo del pais " << actual->lista.peak().frente().pais << " es "<<  actual->lista.peak().tiempomedio() /  actual ->lista.peak().longitud << endl;
         vertmpomediotodos2(actual->hi);    // Recorrer subárbol izquierdo
         vertmpomediotodos2(actual-> hd);      // Recorrer subárbol derecho
     }
 }
 
-/*
-void ABB::buscarOInsertar(Lista lista, SimulacionLista simulacion) {
-    if (simulacion.SacarResfinal().esVacia()) {
-        cout << "Simulación vacía, no se puede procesar." << endl;
-        return;
-    }
 
-    Persona personamid = simulacion.SacarResfinal().peek();
-    string str2 = personamid.pais;
-
-    NodoABB* actual = raiz;
-    NodoABB* padre = nullptr;
-
-    // Buscar el nodo con el ID correspondiente
-    while (actual != nullptr) {
-        if (!actual->lista.peak().esVacia() &&  comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 0) {
-            actual->lista.peak().encolar(personamid);
-            cout << "Nodo encontrado: " << actual->nombre << endl;
-            return;
-        }
-        padre = actual;
-        padre->lista.peak().encolar(personamid);
-        if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 1) {
-            actual = actual->hi;
-        } else {
-            actual = actual->hd;
-        }
-    }
-
-    // Crear un nuevo nodo si no se encontró el ID
-    NodoABB* nuevoNodo = new NodoABB(personamid.pais, lista);
-    nuevoNodo->lista.peak().encolar(personamid);
-
-    if (padre == nullptr) {
-        raiz = nuevoNodo;
-    } else if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 1) {
-        padre->hi = nuevoNodo;
-    } else if (comparaAlfabeto( actual->lista.peak().frente().pais,str2)== 2) {
-        padre->hd = nuevoNodo;
-    }
-
-
-}
-
- */
 int ABB::comparaAlfabeto(string str1, string str2){
     for(int i = 0; i < str1.length() && i < str2.length(); i++){
         if(str1[i] == str2[i]) {

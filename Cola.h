@@ -20,7 +20,7 @@ public:
     void encolarprioridad(Persona persona);
     Persona desencolar();
     int  longitudcola ();
-    float tiempomedio();
+    double tiempomedio();
     Persona &frente();
     void mostrar();
     void incrementartiempo();
